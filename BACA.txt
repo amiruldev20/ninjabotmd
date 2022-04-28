@@ -8,6 +8,7 @@
 - GIT CLONE REPO
 - cd ninjabot-ts
 - npm i
+- npm i -g ts-node
 - npm run dev
 
 #NB, BASE INI BISA DIPAKAI MODEL PLUGINS DAN CASE
