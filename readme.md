@@ -7,14 +7,14 @@
 <a href="https://github.com/amiruldev20/ninjabotmd/network/members"><img title="Forks" src="https://img.shields.io/github/forks/amiruldev20/ninjabotmd?label=Forks&color=blue&style=flat-square"></a>
 <a href="https://github.com/amiruldev20/ninjabotmd/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/amiruldev20/ninjabotmd?label=Watchers&color=green&style=flat-square"></a>
 <a href="https://github.com/amiruldev20/ninjabotmd/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/amiruldev20/ninjabotmd?label=Stars&color=yellow&style=flat-square"></a>
-<a href="https://github.com/amiruldev20/ninjabot-ts/graphs/contributors"><img title="Contributors" src="https://img.shields.io/github/contributors/amiruldev20/ninjabot-ts?label=Contributors&color=blue&style=flat-square"></a>
-<a href="https://github.com/amiruldev20/ninjabot-ts/issues"><img title="Issues" src="https://img.shields.io/github/issues/amiruldev20/ninjabot-ts?label=Issues&color=success&style=flat-square"></a>
+<a href="https://github.com/amiruldev20/ninjabotmd/graphs/contributors"><img title="Contributors" src="https://img.shields.io/github/contributors/amiruldev20/ninjabotmd?label=Contributors&color=blue&style=flat-square"></a>
+<a href="https://github.com/amiruldev20/ninjabotmd/issues"><img title="Issues" src="https://img.shields.io/github/issues/amiruldev20/ninjabotmd?label=Issues&color=success&style=flat-square"></a>
 <a href="https://github.com/Fokusdotid/bersama/issues?q=is%3Aissue+is%3Aclosed"><img title="Issues" src="https://img.shields.io/github/issues-closed/Fokusdotid/bersama?label=Issues&color=red&style=flat-square"></a>
 <a href="https://github.com/Fokusdotid/bersama/pulls"><img title="Pull Request" src="https://img.shields.io/github/issues-pr/Fokusdotid/bersama?label=PullRequest&color=success&style=flat-square"></a>
 <a href="https://github.com/Fokusdotid/bersama/pulls?q=is%3Apr+is%3Aclosed"><img title="Pull Request" src="https://img.shields.io/github/issues-pr-closed/Fokusdotid/bersama?label=PullRequest&color=red&style=flat-square"></a>
 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/amiruldev20/ninjabot-ts)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/amiruldev20/ninjabotmd)
 ## Join Group Diskusi
 [![BOT DISCUSSION GROUP](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EDfrTs6MhuRLT0kIdpb848) 
 **NO BOT**
@@ -22,9 +22,9 @@
 ## INSTALASI DI VPS
 
 ```bash
-git clone https://github.com/amiruldev20/ninjabot-ts
+git clone https://github.com/amiruldev20/ninjabotmd
 
-cd ninjabot-ts
+cd ninjabotmd
 
 bash vps.sh
 ```
