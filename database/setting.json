@@ -1,1 +1,98 @@
-{"name":"Ninja BOT","version":"3.0.1","creator":"Amirul Dev","numown":["6281358919342","628515748946","6289602213818"],"nameown":["Amirul Dev","Amirul Dev","Amirul Dev"],"gc":["https://chat.whatsapp.com/Gkl0LlOd70J1W1VKALiIJt"],"prefix":[".","#","/","!","?"],"ses":"NINJABOT MD","browser":"Firefox","emot":["😆","😅","😂","🥲","☺️","😇","😌","😋","😛","🤨","😎","🤩","🥳","😒","😣","🥺","😤","😡","🥵","😱","😴","🤡","☠️","👍","👎","👀","🗿","🚀","🔥"],"banner":["https://telegra.ph/file/0b51e39c9d1aaa5404759.jpg","https://telegra.ph/file/f8f6a733d8dd23acec9ab.jpg"],"pack":"Made by NINJA BOT\n        info update\n    IG: @amirul.dev","author":"","tempDir":"./temp/","unicode":{"bullet":"◈","wings":["*❮*  ","  *❯*"]},"autoread":false,"antilink":false,"antispam":false,"antiporn":false,"antivonce":true,"antibadword":false,"antibot":true,"antidelete":false,"antivirtext":false,"autoclosegc":false,"detect":false,"autostiker":true,"welcome":false,"resp":{"owner":"*OWNER ONLY* Fitur ini hanya untuk owner bot!!","adm":"*ADMIN ONLY* Fitur ini hanya untuk admin grup!!","gc":"*GROUP ONLY* Fitur ini hanya dapat digunakan didalam grup!!","pc":"*PC ONLY* Fitur ini hanya dapat digunakan di private chat!!","mt":"*MAINTENANCE* Fitur ini sedang dalam tahap perbaikan!!","noadm":"*BOT NOT ADMIN* Jadikan bot sebagai admin grup agar fitur ini dapat bekerja","wait":"*WAITING..* Permintaan anda sedang diproses!!","error":"*ERROR* Terjadi kesalahan saat mengirim permintaan anda!!","replymedia":"*REPPY MEDIA* Silahkan reply / balas pesan yang bersifat media!!","help":"*INFO* Untuk melihat detail command silahkan ketik -h setelah command. contoh #about -h","register":"nganu"}}
+{
+  "name": "Ninja BOT",
+  "version": "3.0.1",
+  "creator": "Amirul Dev",
+  "numown": [
+    "6281358919342",
+    "628515748946",
+    "6289602213818"
+  ],
+  "nameown": [
+    "Amirul Dev",
+    "Amirul Dev",
+    "Amirul Dev"
+  ],
+  "gc": [
+    "https://chat.whatsapp.com/Gkl0LlOd70J1W1VKALiIJt"
+  ],
+  "prefix": [
+    ".",
+    "#",
+    "/",
+    "!",
+    "?"
+  ],
+  "ses": "NINJABOT MD",
+  "browser": "Firefox",
+  "emot": [
+    "😆",
+    "😅",
+    "😂",
+    "🥲",
+    "☺️",
+    "😇",
+    "😌",
+    "😋",
+    "😛",
+    "🤨",
+    "😎",
+    "🤩",
+    "🥳",
+    "😒",
+    "😣",
+    "🥺",
+    "😤",
+    "😡",
+    "🥵",
+    "😱",
+    "😴",
+    "🤡",
+    "☠️",
+    "👍",
+    "👎",
+    "👀",
+    "🗿",
+    "🚀",
+    "🔥"
+  ],
+  "banner": [
+    "https://telegra.ph/file/0b51e39c9d1aaa5404759.jpg",
+    "https://telegra.ph/file/f8f6a733d8dd23acec9ab.jpg"
+  ],
+  "pack": "Made by NINJA BOT\n        info update\n    IG: @amirul.dev",
+  "author": "",
+  "tempDir": "./temp/",
+  "unicode": {
+    "bullet": "◈",
+    "wings": [
+      "*❮*  ",
+      "  *❯*"
+    ]
+  },
+  "autoread": false,
+  "antilink": false,
+  "antispam": false,
+  "antiporn": false,
+  "antivonce": true,
+  "antibadword": false,
+  "antibot": true,
+  "antidelete": false,
+  "antivirtext": false,
+  "autoclosegc": false,
+  "detect": false,
+  "autostiker": true,
+  "welcome": false,
+  "resp": {
+    "owner": "*OWNER ONLY* Fitur ini hanya untuk owner bot!!",
+    "adm": "*ADMIN ONLY* Fitur ini hanya untuk admin grup!!",
+    "gc": "*GROUP ONLY* Fitur ini hanya dapat digunakan didalam grup!!",
+    "pc": "*PC ONLY* Fitur ini hanya dapat digunakan di private chat!!",
+    "mt": "*MAINTENANCE* Fitur ini sedang dalam tahap perbaikan!!",
+    "noadm": "*BOT NOT ADMIN* Jadikan bot sebagai admin grup agar fitur ini dapat bekerja",
+    "wait": "*WAITING..* Permintaan anda sedang diproses!!",
+    "error": "*ERROR* Terjadi kesalahan saat mengirim permintaan anda!!",
+    "replymedia": "*REPPY MEDIA* Silahkan reply / balas pesan yang bersifat media!!",
+    "help": "*INFO* Untuk melihat detail command silahkan ketik -h setelah command. contoh #about -h",
+    "register": "nganu"
+  }
+}
