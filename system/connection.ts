@@ -25,13 +25,13 @@ level: 'fatal',
 }),
 });
  
- // TEST ANTI CALL
+ // ANTI CALL
  socket.ws.on('CB:call', async(json: any) => {
  const idny = json.content[0].attrs['call-creator']
-    if (json.content[0].tag == 'offer') {
-    socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!`})
+ if (json.content[0].tag == 'offer') {
+ socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!`})
     
-  // send owner
+ // send owner
   socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, { 
   text: `*-- ANTI CALL --*
   @${idny.split("@")[0]} telah menelfon bot`, mentions: [idny]})
