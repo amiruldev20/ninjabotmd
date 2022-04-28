@@ -26,9 +26,10 @@ git clone https://github.com/amiruldev20/ninjabotmd
 
 cd ninjabotmd
 
-bash vps.sh
+npm i
+
 ```
-* perintah jalankan: yarn run ex
+* perintah jalankan: npm run dev
 ---------
 
 ## UNTUK PENGGUNA TERMUX
@@ -36,7 +37,7 @@ bash vps.sh
 * Download Termux [`Klik Disini`](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk)
 
 ```
-$ bash install/termux.sh
+comingsoon
 ```
 ---------
 ## UNTUK PENGGUNA HEROKU
