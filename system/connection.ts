@@ -25,18 +25,18 @@ level: 'fatal',
 }),
 });
  
- // TEST ANTI CALL
+ // ANTI CALL BETA
  socket.ws.on('CB:call', async(json: any) => {
  const idny = json.content[0].attrs['call-creator']
-    if (json.content[0].tag == 'offer') {
-    socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!`})
+ if (json.content[0].tag == 'offer') {
+ socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!`})
     
-  // send owner
-  socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, { 
+
+// send owner socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, { 
   text: `*-- ANTI CALL --*
   @${idny.split("@")[0]} telah menelfon bot`, mentions: [idny]})
     }
- })
+})
  
  // TEST WELLCOME MSG 
  socket.ev.on('group-participants.update', async(rul: any) => {
@@ -87,6 +87,7 @@ socket.sendMessage(`${set.own[0]}@s.whatsapp.net`, {
 })
  
  
+//####  G USH DIEDIT DARIPADA EROR ####//
 socket.ev.on('connection.update', (condition) => {
 switch (condition.connection) {
 case 'open':
