@@ -28,6 +28,8 @@ cd ninjabotmd
 
 npm i
 
+npm i -g ts-node
+
 ```
 * perintah jalankan: npm run dev
 ---------
