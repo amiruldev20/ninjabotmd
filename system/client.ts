@@ -143,6 +143,9 @@ throw util.logger.format(e);
 // --- FUNCTION BARU --- //
  
 //-- RANDOM --//
+/**
+ * @param  {any[]|number} content
+ */
 public rand = (content: any[] | number) => {
 	if(content instanceof Array) {
 		return content[Math.floor(Math.random() * content.length)];
@@ -165,34 +168,61 @@ return `https://mmg.soff.tk/d/f/${urlmsg.split('/d/f/')[1]}/${encodeURIComponent
 }
 
 //-- SEND MSG --- //
+/**
+ * @param  {any} mel
+ * @param  {any} text
+ */
 public sendMsg = async(mel: any, text: any) => {
 return this.socket.sendMessage(mel.from, { text: text })
 }
 
 //# SEND REPLY 
+/**
+ * @param  {Proto} mel
+ * @param  {string} text
+ */
 public reply = async (mel: Proto, text: string): Promise<baileys.proto.WebMessageInfo> =>
 this.send(mel, { text: util.logger.format(text).trim(), quoted: mel });
 
-//-- SEN STICKER --//
+//-- SEND STICKER --//
+/**
+ * @param  {any} mel
+ * @param  {Buffer} sticker
+ * @param  {Content} content
+ */
 public sendSt = async(mel: any, sticker: Buffer, content: Content) => {
 return this.socket.sendMessage(mel.from, { sticker: sticker,
 ...content }, { quoted: mel, ephemeralExpiration: 24*3600})
 }
 
 //# SEND VN 
+/**
+ * @param  {Proto} mel
+ * @param  {string} text
+ */
 public sendVn = async (mel: Proto, text: string) => {
 let url = await client.getBuffer(text)
-this.send(mel, { audio: (await url.buffer) as baileys.WAMediaUpload, ptt: true, mimetype: 'audio/mpeg', quoted: mel })
+this.send(mel, { audio: url.buffer as baileys.WAMediaUpload, ptt: true, mimetype: 'audio/mpeg', quoted: mel })
 }
 
 
-//# SEND VN 
+//# SEND AUDIO
+/**
+ * @param  {Proto} mel
+ * @param  {string} text
+ */
 public sendAud = async (mel: Proto, text: string) => {
 let url = await client.getBuffer(text)
-this.send(mel, { audio: (await url.buffer) as baileys.WAMediaUpload, ptt: false, mimetype: 'audio/mpeg', quoted: mel })
+this.send(mel, { audio: url.buffer as baileys.WAMediaUpload, ptt: false, mimetype: 'audio/mpeg', quoted: mel })
 }
 
 //-- SEND MEDIA --//
+/**
+ * @param  {any} jid
+ * @param  {any} path
+ * @param  {string} capt
+ * @param  {boolean} anu
+ */
 public sendMedia = async (jid: any, path: any, capt: string, anu: boolean) => {
 let { ext, mime, buffer } = await this.getBuffer(path)
 let messageType = mime.split("/")[0]
@@ -230,6 +260,11 @@ quoted: jid
 }
 
 //# READ CHAT 
+/**
+ * @param  {Proto} jid
+ * @param  {string} participant
+ * @param  {string} messageID
+ */
 public readChat = async (jid: Proto, participant: string, messageID: string) => {
 return await this.socket.sendReadReceipt(typeof jid === 'object' ? jid.key.remoteJid! : jid, participant, [messageID])
 }
