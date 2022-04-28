@@ -2,10 +2,10 @@
 ## Base example bot whatsapp multi device library baileys
 ### script ini akan terus dikembangkan, apabila butuh bantuan silahkan wa.me/6281358919342
 
-<a href="https://visitor-badge.glitch.me/badge?page_id=amiruldev20/ninjabot-ts"><img title="Visitor" src="https://visitor-badge.glitch.me/badge?page_id=amiruldev20/ninjabot-ts"></a>
-<a href="https://github.com/amiruldev20/ninjabot-ts/network/members"><img title="Forks" src="https://img.shields.io/github/forks/amiruldev20/ninjabot-ts?label=Forks&color=blue&style=flat-square"></a>
-<a href="https://github.com/amiruldev20/ninjabot-ts/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/amiruldev20/ninjabot-ts?label=Watchers&color=green&style=flat-square"></a>
-<a href="https://github.com/amiruldev20/ninjabot-ts/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/amiruldev20/ninjabot-ts?label=Stars&color=yellow&style=flat-square"></a>
+<a href="https://visitor-badge.glitch.me/badge?page_id=amiruldev20/ninjabotmd"><img title="Visitor" src="https://visitor-badge.glitch.me/badge?page_id=amiruldev20/ninjabotmd"></a>
+<a href="https://github.com/amiruldev20/ninjabotmd/network/members"><img title="Forks" src="https://img.shields.io/github/forks/amiruldev20/ninjabotmd?label=Forks&color=blue&style=flat-square"></a>
+<a href="https://github.com/amiruldev20/ninjabotmd/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/amiruldev20/ninjabotmd?label=Watchers&color=green&style=flat-square"></a>
+<a href="https://github.com/amiruldev20/ninjabotmd/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/amiruldev20/ninjabotmd?label=Stars&color=yellow&style=flat-square"></a>
 <a href="https://github.com/amiruldev20/ninjabot-ts/graphs/contributors"><img title="Contributors" src="https://img.shields.io/github/contributors/amiruldev20/ninjabot-ts?label=Contributors&color=blue&style=flat-square"></a>
 <a href="https://github.com/amiruldev20/ninjabot-ts/issues"><img title="Issues" src="https://img.shields.io/github/issues/amiruldev20/ninjabot-ts?label=Issues&color=success&style=flat-square"></a>
 <a href="https://github.com/Fokusdotid/bersama/issues?q=is%3Aissue+is%3Aclosed"><img title="Issues" src="https://img.shields.io/github/issues-closed/Fokusdotid/bersama?label=Issues&color=red&style=flat-square"></a>
