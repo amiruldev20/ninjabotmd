@@ -1,7 +1,7 @@
 import Client from './client';
 import Command from './cmd';
 declare global {
-	var set: typeof import('../database/setting.json');
+	var set: typeof import('../database/settings.json');
 	var util: typeof import('./util');
 	var database: {
 		[k: string]: any;

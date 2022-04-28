@@ -1,6 +1,6 @@
 
 import chalk from 'chalk';
-import set from '../database/setting.json';
+import set from '../database/settings.json';
 import FormData from 'form-data';
 import CommandHandler from './cmd';
 import CreateConnection from './connection';
