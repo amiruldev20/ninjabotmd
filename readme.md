@@ -19,7 +19,16 @@
 [![BOT DISCUSSION GROUP](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EDfrTs6MhuRLT0kIdpb848) 
 **NO BOT**
 
-## INSTALASI DI VPS
+## BAHAN² DAN KONFIGURASINYA
+
+* Download NODEJS [`Klik Disini`](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk)
+* Download GIT [`Klik Disini`](url.com)
+* Download FFMPEG [`Klik disini`](url.com)
+ - add env (rdp) C:/ffmpeg/bin
+ - add env (rdp) C:/Windows/System32
+* Download Imagemagick [`Klik Disini`](url.com)
+
+## INSTALASI DI VPS & RDP
 
 ```bash
 git clone https://github.com/amiruldev20/ninjabotmd
@@ -28,6 +37,8 @@ cd ninjabotmd
 
 npm i
 
+
+-- jika ts-node dan nodemon tidak terinstall, silahkan install manual dengan command dibawah
 npm i -g ts-node
 npm i -g nodemon
 ```
