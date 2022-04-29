@@ -3,15 +3,15 @@ cmd.on(
 // diatas ini command, jika ingin bnyk command, tambahkan sererusnya. cnth: ['command1', 'command2']
 ['tag'],
 // diatas ini adalah tag, jika ingin bnyk tag, tambahkan sererusnya. cnth: ['tag1', 'tag2']
-async (mel: any, { query }) => {
+async (renz: any, { query }) => {
 /*
 query sama dengan args, anda bisa input query, text, command
 */
-client.reply(mel, `halo`)
+client.reply(renz, `halo`)
 //untuk list function anda cek di system/client.ts
 
 //jika ingin gunakan send message dari baileys begini
-client.socket.sendMessage(mel.from, {
+client.socket.sendMessage(renz.from, {
     text: "halo"
 })
 // jika tidak ingin kepanjangan, anda buat const md = client.socket  jadi nanti tinggal md.sendMessage.
@@ -30,8 +30,8 @@ client.socket.sendMessage(mel.from, {
 cmd.on(
 ['command'],
 ['tag'],
-async (mel: any, { query }) => {
-client.reply(mel, "oke")
+async (renz: any, { query }) => {
+client.reply(renz, "oke")
 },
 {
     owner: false,

@@ -16,15 +16,15 @@ import pino from 'pino';
 cmd.on(
 	['>', '=>'],
 	['owner'],
-	async (mel, { text, cmd }) => {
+	async (renz, { text, cmd }) => {
 		const parse = cmd.includes('=>') ? text.replace('=>', 'return ').replace('md', 'client.socket').replace('legacy', 'client.socket').replace('zz', '.toString()') : text.replace('>', '').replace('md', 'client.socket').replace('legacy', 'client.socket')
 	 	try {
 			const evaluate = await eval(`;(async () => {${parse} })()`).catch((e: unknown) => {
-				return client.reply(mel, e as string);
+				return client.reply(renz, e as string);
 			});
-			return client.reply(mel, evaluate);
+			return client.reply(renz, evaluate);
 		} catch (e) {
-			return client.reply(mel, e as string);
+			return client.reply(renz, e as string);
 		}
 	},
 	{
@@ -38,14 +38,14 @@ cmd.on(
 cmd.on(
 	['$'],
 	['owner'],
-	async (mel, { query }) => {
+	async (renz, { query }) => {
 		try {
 			exec(`${query}`, (e, a) => {
-				if (e) return client.reply(mel, `${e}`);
-				client.reply(mel, a);
+				if (e) return client.reply(renz, `${e}`);
+				client.reply(renz, a);
 			});
 		} catch (e) {
-			return client.reply(mel, e as string);
+			return client.reply(renz, e as string);
 		}
 	},
 	{

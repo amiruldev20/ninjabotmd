@@ -1,30 +1,30 @@
 import {
-config
+    config
 } from 'dotenv';
 import {
-schedule
+    schedule
 } from 'node-cron';
 import {
-logger,
-run
+    logger,
+    run
 } from './util';
 import {
-existsSync,
-rmdirSync
+    existsSync,
+    rmdirSync
 } from 'fs';
 
 try {
-config({
-path: '../.env',
-});
-schedule('*/10 * * * *', () => {
-if (existsSync('temp')) {
-rmdirSync('./temp', {
-recursive: true,
-});
-}
-});
-run();
+    config({
+        path: '../.env',
+    });
+    schedule('*/10 * * * *', () => {
+        if (existsSync('temp')) {
+            rmdirSync('./temp', {
+                recursive: true,
+            });
+        }
+    });
+    run();
 } catch (e) {
-throw logger.format(e);
+    throw logger.format(e);
 }

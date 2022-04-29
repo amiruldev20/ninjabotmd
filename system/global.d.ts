@@ -8,7 +8,7 @@ declare global {
 	};
 	var client: Client;
 	var cmd: Command;
-var aviewonce: any,
-var asticker: any,
-var usr: any,
+	var aviewonce: any,
+	var asticker: any,
+	var usr: any,
 }
