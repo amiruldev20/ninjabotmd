@@ -53,7 +53,7 @@ silahkan command di bot seperti dibawah, untuk semua setting ada di database/set
 => Object.keys(database) = cek list database
 => Object.keys(global) = cek global
 
-eval bot => mel
+eval bot => renz
 ```
 
 ## UNTUK PENGGUNA TERMUX
