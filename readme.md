@@ -45,6 +45,17 @@ npm i -g nodemon
 * perintah jalankan: npm run dev
 ---------
 
+## CEK LIST FUNCTION
+```
+silahkan command di bot seperti dibawah, untuk semua setting ada di database/settings.json
+=> Object.keys(client) = cek list client yg ada di client.ts
+=> Object.keys(util) = cek list func yg ada di util.ts
+=> Object.keys(database) = cek list database
+=> Object.keys(global) = cek global
+
+eval bot => mel
+```
+
 ## UNTUK PENGGUNA TERMUX
 
 * Download Termux [`Klik Disini`](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk)
