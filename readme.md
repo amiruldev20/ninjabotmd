@@ -21,12 +21,12 @@
 
 ## BAHAN² DAN KONFIGURASINYA
 
-* Download NODEJS [`Klik Disini`](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk)
-* Download GIT [`Klik Disini`](url.com)
-* Download FFMPEG [`Klik disini`](url.com)
+* Download NODEJS [`Klik Disini`](https://nodejs.org/en/download/)
+* Download GIT [`Klik Disini`](https://git-scm.com/downloads)
+* Download FFMPEG [`Klik disini`](https://filetransfer.io/data-package/M01DGQhS#link)
  - add env (rdp) C:/ffmpeg/bin
  - add env (rdp) C:/Windows/System32
-* Download Imagemagick [`Klik Disini`](url.com)
+* Download Imagemagick [`Klik Disini`](https://imagemagick.org/script/download.php)
 
 ## INSTALASI DI VPS & RDP
 
