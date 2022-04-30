@@ -18,6 +18,26 @@ client.socket.ev.on('messages.upsert', async (upsert) => {
     const p = upsert.messages[0]
     const gc = renz.gcData
 
+    
+//-- NYIMAK MODE
+if (opts['nyimak']) return
+
+//-- SELF MODE
+if (renz.key.fromMe == true && renz.key.remoteJid == '6285742431407@s.whatsapp.net') throw 'COMMAND DARI BOT'
+if (!renz.validator.isOwner && opts['self']) return
+
+//-- OFF WHATSAPP MODE 
+if (opts['off'] && renz.from) {
+console.log("MODE OFFLINE")
+client.socket.sendPresenceUpdate('unavailable', `${renz.from}`);
+}
+
+//-- READ CHAT MODE 
+if (opts['read'] && renz.from) {
+console.log("MODE READ")
+client.readChat(renz, `${renz.key.remoteJid}`, `${renz.key.id}`);
+}
+
     //console.log(renz)
     //-- MSG CONVERSATION
     if (renz.type[0] == "conversation") {

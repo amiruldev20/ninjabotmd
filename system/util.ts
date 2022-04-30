@@ -4,6 +4,7 @@ import set from '../database/settings.json';
 import FormData from 'form-data';
 import CommandHandler from './cmd';
 import CreateConnection from './connection';
+const yargs = require('yargs');
 import {
 	format
 }
@@ -146,6 +147,7 @@ export async function run(): Promise<void> {
 		await delay(2000);
 		console.clear();
 		console.log(chalk.cyan.bold(readFileSync('./system/loader.txt').toString()));
+		global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse());
 		global.set = set;
 		global.util = await
 			import('./util');
