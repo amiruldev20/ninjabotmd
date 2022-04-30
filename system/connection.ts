@@ -14,7 +14,7 @@ export default async function CreateConnection() {
     database.saveOn = database?.saveOn ?? 0;
 
     util.logger.info(atob("TWFkZSBieSBBbWlydWwgRGV2LCBmb2xsb3cgbWUgb24gaW5zdGFncmFtIEBhbWlydWwuZGV2"))
-    const { state, saveState } = useSingleFileAuthState('./database/session.json');
+    const { state, saveState } = useSingleFileAuthState(`./database/${opts._[0] || 'ninjabot'}.json`);
     const socket = makeWASocket({
       auth: state,
       printQRInTerminal: true,
