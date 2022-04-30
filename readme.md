@@ -43,6 +43,7 @@ npm i -g ts-node
 npm i -g nodemon
 ```
 * perintah jalankan: npm run dev
+* ingin session lain? npm run dev . namasession
 ---------
 
 ## CEK LIST FUNCTION
