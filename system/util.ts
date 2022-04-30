@@ -147,6 +147,7 @@ export async function run(): Promise<void> {
 		await delay(2000);
 		console.clear();
 		console.log(chalk.cyan.bold(readFileSync('./system/loader.txt').toString()));
+		
 		global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse());
 		global.set = set;
 		global.util = await
