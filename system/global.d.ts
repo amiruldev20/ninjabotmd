@@ -11,4 +11,5 @@ declare global {
 	var aviewonce: any,
 	var asticker: any,
 	var usr: any,
+	var opts: any,
 }
