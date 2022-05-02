@@ -48,12 +48,12 @@ export function autoPath(format: string, filename?: string, useTemp = true): str
 	if (useTemp && !existsSync(global.set.tempDir.split('/')[1])) mkdirSync(global.set.tempDir.split('/')[1]);
 	const basePath = useTemp ? global.set.tempDir : '';
 	return `${basePath}${filename
-			? filename.includes('?>')
-				? Date.now() + filename.split('?>')[1]
-				: filename.includes('?<')
-					? filename.split('?<')[1] + Date.now()
-					: filename
-			: 'clk' + Date.now()
+		? filename.includes('?>')
+			? Date.now() + filename.split('?>')[1]
+			: filename.includes('?<')
+				? filename.split('?<')[1] + Date.now()
+				: filename
+		: 'clk' + Date.now()
 		}${format && !format.includes('.') ? '.' + format : format}`;
 }
 export function headers(additional?: AxiosRequestConfig, additionalHeaders?: AxiosRequestHeaders) {
@@ -147,7 +147,7 @@ export async function run(): Promise<void> {
 		await delay(2000);
 		console.clear();
 		console.log(chalk.cyan.bold(readFileSync('./system/loader.txt').toString()));
-		
+
 		global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse());
 		global.set = set;
 		global.util = await
