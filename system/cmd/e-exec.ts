@@ -16,24 +16,14 @@ import {
 	from 'path'
 import * as fetch from 'node-fetch'
 const axios = require('axios')
-const bo = require('@bochilteam/scraper')
-const bail = require('@adiwajshing/baileys')
-const wsf = require('wa-sticker-formatter')
 const os = require('os')
 const fs = require("fs")
-const pino = require('pino')
-/*
-import * as trans from 'translate-google'
-const tr = trans
-*/
+
 cmd.on(
 	['>', '=>'], ['owner'], async (renz, {
 		text, cmd
 	}) => {
 	//-- ATRIBUT
-	const anu = await client.rand(set.banner)
-	const buf = await client.getBuffer(anu)
-	const xurl = `https://telegra.ph/file/0ca2fdeabe1ce8de08103.jpg`
 	const wm1 = `Made by Amirul Dev`
 	const wm2 = `Made by @687824239`
 	const web = 'https://amiruldev.my.id'
@@ -53,8 +43,10 @@ cmd.on(
 	wait: false,
 	prefix: false,
 });
+
 cmd.on(
-	['$'], ['owner'], async (renz, {
+	['$'], 
+   ['owner'], async (renz, {
 		query, text
 	}) => {
 	let o
@@ -74,6 +66,7 @@ cmd.on(
 	wait: false,
 	prefix: false,
 });
+
 cmd.on(
 	['push'], ['owner'], async (renz, {
 		query, text
@@ -96,6 +89,7 @@ cmd.on(
 	wait: false,
 	prefix: false,
 });
+
 cmd.on(
 	['pull'], ['owner'], async (renz, {
 		query, text
