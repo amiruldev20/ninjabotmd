@@ -39,12 +39,10 @@ export interface StickerConfig {
 }
 
 export interface Proto extends proto.IWebMessageInfo {
-
+	sender: string | null | undefined;
+	from: string | null | undefined;
 	baileys: boolean;
-	sender: {
-		jid: string | null | undefined;
-		name: string | null | undefined;
-	};
+    chat: string | null | undefined;
 	client: {
 		name: string | undefined;
 		jid: string;
@@ -63,7 +61,6 @@ export interface Proto extends proto.IWebMessageInfo {
 	};
 	type: [string, string | undefined];
 	string: string;
-	from: string | null | undefined;
 	fromMe: boolean;
 	mentions: string[] | undefined;
 	message: proto.IMessage | null | undefined;

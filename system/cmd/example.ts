@@ -1,5 +1,5 @@
 cmd.on(
-['test'],
+['p'],
 // diatas ini command, jika ingin bnyk command, tambahkan sererusnya. cnth: ['command1', 'command2']
 ['tag'],
 // diatas ini adalah tag, jika ingin bnyk tag, tambahkan sererusnya. cnth: ['tag1', 'tag2']
@@ -11,7 +11,7 @@ client.reply(renz, `halo`)
 //untuk list function anda cek di system/client.ts
 
 //jika ingin gunakan send message dari baileys begini
-client.socket.sendMessage(renz.from, {
+sock.sendMessage(renz.from, {
     text: "halo"
 })
 // jika tidak ingin kepanjangan, anda buat const md = client.socket  jadi nanti tinggal md.sendMessage.
@@ -21,21 +21,21 @@ client.socket.sendMessage(renz.from, {
 {
     owner: true, //true jika khusus owner
     wait: true, // true jika ingin ada pesan menunggu
-    prefix: true, // true jika ingin pakai prefix, jika tanpa prefix silahkan di false
+    prefix: false, // true jika ingin pakai prefix, jika tanpa prefix silahkan di false
     group: true, // true jika hanya di group saja
 },
 )
 
 // jika ingin jadikan case cukup tambahkan kode sesuai diatas seperti ini
 cmd.on(
-['command'],
+['tes'],
 ['tag'],
 async (renz: any, { query }) => {
-client.reply(renz, "oke")
+sock.sendMessage(renz.from, { text: `Hello, ${renz.pushName}`})
 },
 {
     owner: false,
     wait: true,
-    prefix: true,
+    prefix: false,
 },
 )

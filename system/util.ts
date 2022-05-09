@@ -175,6 +175,25 @@ export async function run(): Promise<void> {
 			await
 				import(`./event/${a}`);
 		}
+		client.socket.ev.on('messages.upsert', async (upsert) => {
+			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
+				return;
+			}
+	
+		const renz = await client.metadata(upsert.messages[0])
+//console.log(renz)
+		var obj = usr.some((val: { id: any }) => val.id == renz.sender)
+        global.cekusr = obj
+	   	global.dbusr = obj == true ? usr.find((v: { id: string }) => v.id == renz.sender) : false
+		global.sock = client.socket
+console.log(dbusr)
+		console.log(chalk.gray(`
+-=[ CEK USER ]=- 
+${renz.sender} • ${cekusr}
+${renz.pushName}
+
+Register: ${dbusr.regist}`))
+		})
 		return global.cmd.commandList.length > 0 ? logger.cmd(`Succesfully loaded ${global.cmd.commandList.length} commands`) : logger.warn('There is no command loaded');
 
 	} catch (e) {

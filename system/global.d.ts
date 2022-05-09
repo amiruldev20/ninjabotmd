@@ -12,4 +12,7 @@ declare global {
 	var asticker: any,
 	var usr: any,
 	var opts: any,
+	var cekusr: any,
+	var dbusr: any;
+	var sock: any;
 }

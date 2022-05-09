@@ -99,7 +99,7 @@ export default class CommandHandler {
           result =
             resultResponse.trim() +
             (() => {
-              if (!['owner', 'wait'].includes(responseKey))
+              if (!['owner', 'wait', 'regist'].includes(responseKey))
                 if (['query'].includes(responseKey) || resultResponse.includes('-h')) return set.resp.help;
               return '';
             })();
@@ -113,7 +113,8 @@ export default class CommandHandler {
 
   public getAccess = (renz: Proto, event: ICommandHandler.CommandProperty): void | Promise<proto.WebMessageInfo> | 200 => {
     let CONFIG!: [string | string[] | boolean, string];
-
+    
+    if (event.event?.regist && dbusr.regist == false) CONFIG = [event.event.regist!, 'regist'];
     if (event.event?.query && event.query.length === 0) CONFIG = [event.event.query!, 'query'];
     if (event.event?.group && !renz.validator.isGroup) CONFIG = [event.event.group!, 'group'];
     if (event.event?.owner && !renz.validator.isOwner) CONFIG = [event.event.owner!, 'owner'];
@@ -140,6 +141,7 @@ export default class CommandHandler {
   private getCommand = (text: string): ICommandHandler.CommandProperty | {} => {
     let ev: ICommandHandler.CommandProperty = {} as ICommandHandler.CommandProperty;
     for (const a of this.commandList) {
+
       if (!a.enable) continue;
       const prefix = a.prefix
         ? this.prefix.filter((a) => (a as RegExp).test(text)).sort((a, b) => b.toString().length - a.toString().length)[0]
@@ -160,6 +162,7 @@ export default class CommandHandler {
             ...this.commandList[ev.event.index],
             ...property,
           };
+          
           return this.commandList[ev.event.index];
         },
       };

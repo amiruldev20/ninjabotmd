@@ -10,7 +10,7 @@ export namespace ICommandHandler {
         tag: string[];
         help: string;
         index: number;
-        callback: (mel: Proto, property: CommandProperty) => Promise<any> | any;
+        callback: (renz: Proto, property: CommandProperty) => Promise<any> | any;
         prefix: boolean;
         enable: boolean;
     }
@@ -21,6 +21,8 @@ export namespace ICommandHandler {
         query?: string;
         owner?: boolean | string;
         group?: boolean | string;
+        regist?: boolean | string;
+        info?: boolean | string;
     }
     export interface CommandProperty {
         event: Event;

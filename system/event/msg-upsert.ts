@@ -1,6 +1,7 @@
 import * as util from 'util';
 import { red, green, yellow, blue, magenta, cyan } from 'chalk';
 import * as baileys from '@adiwajshing/baileys';
+import { isPropertyAccessChain } from 'typescript';
 
 client.socket.ev.on('messages.upsert', async (upsert) => {
     if (
@@ -9,7 +10,7 @@ client.socket.ev.on('messages.upsert', async (upsert) => {
     ) {
         return;
     }
-
+    process.on('unhandledRejection', console.log)
     const renz = await client.metadata(upsert.messages[0]);
 
     const rul = client.socket;
