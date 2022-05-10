@@ -46,6 +46,20 @@ npm i -g nodemon
 * ingin session lain? npm run dev . namasession
 ---------
 
+## INSTALASI DI PANEL PTERODACTYL
+```bash
+silahkan beli akun panel pterodactyl ke orang atau bisa minta ke saya, chat whatsapp diatas
+
+++ CONFIGURASI ++
+1. silahkan suruh penjual untuk membuatkan server dengan egg nodes
+2. suruh penjual untuk mencustom startup server anda seperti dibawah ini
+if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then /usr/local/bin/npm install; fi; /usr/local/bin/npm run dev
+
+3. login ke akun anda
+4. klik server dan pergi ke startup
+5. git repo address silahkan isi dengan https://github.com/amiruldev20/ninjabotmd
+```
+
 ## CEK LIST FUNCTION
 ```
 silahkan command di bot seperti dibawah, untuk semua setting ada di database/settings.json
