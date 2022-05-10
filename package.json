@@ -1,14 +1,14 @@
 {
-    "name": "ninjabot-ts",
-    "version": "3.0.1",
+    "name": "ninjabotmd",
+    "version": "4.0.0",
     "description": "Multiple bot whatsapp automatic, all in one",
     "main": "./system/main.ts",
     "scripts": {
         "build": "tsc",
         "start": "ts-node --files ./system/main.ts",
         "dev": "nodemon --files --watch \"./**\" --ext \"ts\" --exec \"ts-node --files ./system/main.ts\"",
-        "test": "ts-node --files ./test.ts",
-        "y": "ts-node-dev --files ./system/main.ts"
+        "test": "ts-node --files ./test.ts"
+
     },
     "author": "amiruldev20",
     "license": "ISC",
