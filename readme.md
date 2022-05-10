@@ -58,6 +58,13 @@ if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [[ ! -z 
 3. login ke akun anda
 4. klik server dan pergi ke startup
 5. git repo address silahkan isi dengan https://github.com/amiruldev20/ninjabotmd
+6. install branch isi dengan main
+7. bot js file isi index.js
+8. git username isi dengan username githubmu
+9. git access token isi dengan token githubmu
+10. pergi ke console dan klik start
+
+#NB: jika tidak bisa git clone silahkan pergi ke settings dan klik reinstall server
 ```
 
 ## CEK LIST FUNCTION
