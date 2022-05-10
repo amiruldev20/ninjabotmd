@@ -8,7 +8,6 @@
         "start": "ts-node --files ./system/main.ts",
         "dev": "nodemon --files --watch \"./**\" --ext \"ts\" --exec \"ts-node --files ./system/main.ts\"",
         "test": "ts-node --files ./test.ts"
-
     },
     "author": "amiruldev20",
     "license": "ISC",

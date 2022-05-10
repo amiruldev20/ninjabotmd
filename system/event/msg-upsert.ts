@@ -33,9 +33,10 @@ console.log("MODE OFFLINE")
 client.socket.sendPresenceUpdate('unavailable', `${renz.from}`);
 }
 
-//-- READ CHAT MODE 
+//-- READ CHAT PC
 if (opts['read'] && renz.from) {
 console.log("MODE READ")
+
 client.readChat(renz, `${renz.key.remoteJid}`, `${renz.key.id}`);
 }
 

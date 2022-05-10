@@ -1,0 +1,72 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@8.9.0
+2 info using node@v16.15.0
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 1ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 9ms
+6 timing config:load:builtin Completed in 9ms
+7 timing config:load:cli Completed in 1ms
+8 timing config:load:env Completed in 1ms
+9 timing config:load:project Completed in 3ms
+10 timing config:load:file:/home/container/.npmrc Completed in 0ms
+11 timing config:load:user Completed in 0ms
+12 timing config:load:file:/usr/local/etc/npmrc Completed in 0ms
+13 timing config:load:global Completed in 1ms
+14 timing config:load:validate Completed in 0ms
+15 timing config:load:credentials Completed in 1ms
+16 timing config:load:setEnvs Completed in 0ms
+17 timing config:load Completed in 17ms
+18 timing npm:load:configload Completed in 17ms
+19 timing npm:load:mkdirpcache Completed in 1ms
+20 timing npm:load:mkdirplogs Completed in 0ms
+21 verbose title npm i speedtest
+22 verbose argv "i" "speedtest"
+23 timing npm:load:setTitle Completed in 1ms
+24 timing config:load:flatten Completed in 2ms
+25 timing npm:load:display Completed in 2ms
+26 verbose logfile logs-max:10 dir:/home/container/.npm/_logs
+27 verbose logfile /home/container/.npm/_logs/2022-05-10T03_17_10_368Z-debug-0.log
+28 timing npm:load:logFile Completed in 4ms
+29 timing npm:load:timers Completed in 0ms
+30 timing npm:load:configScope Completed in 0ms
+31 timing npm:load Completed in 26ms
+32 timing arborist:ctor Completed in 0ms
+33 silly logfile done cleaning log files
+34 timing idealTree:init Completed in 364ms
+35 timing idealTree:userRequests Completed in 9ms
+36 silly idealTree buildDeps
+37 silly fetch manifest speedtest@*
+38 timing arborist:ctor Completed in 0ms
+39 http fetch GET 200 https://registry.npmjs.org/speedtest 1056ms (cache miss)
+40 silly placeDep ROOT speedtest@ OK for: ninjabotmd@4.0.0 want: *
+41 timing idealTree:#root Completed in 1060ms
+42 timing idealTree:node_modules/speedtest Completed in 0ms
+43 timing idealTree:buildDeps Completed in 1061ms
+44 timing idealTree:fixDepFlags Completed in 12ms
+45 timing idealTree Completed in 1447ms
+46 timing command:i Completed in 1451ms
+47 verbose type range
+48 verbose stack speedtest: No versions available for speedtest
+48 verbose stack     at pickManifest (/usr/local/lib/node_modules/npm/node_modules/npm-pick-manifest/lib/index.js:140:25)
+48 verbose stack     at module.exports (/usr/local/lib/node_modules/npm/node_modules/npm-pick-manifest/lib/index.js:187:16)
+48 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/pacote/lib/registry.js:126:26
+48 verbose stack     at async Arborist.[nodeFromEdge] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1106:19)
+48 verbose stack     at async Arborist.[buildDepStep] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:974:11)
+48 verbose stack     at async Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:218:7)
+48 verbose stack     at async Promise.all (index 1)
+48 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:153:5)
+48 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:156:5)
+48 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli.js:78:5)
+49 verbose cwd /home/container
+50 verbose Linux 5.13.0-1022-azure
+51 verbose node v16.15.0
+52 verbose npm  v8.9.0
+53 error code ENOVERSIONS
+54 error No versions available for speedtest
+55 verbose exit 1
+56 timing npm Completed in 1513ms
+57 verbose unfinished npm timer reify 1652152630428
+58 verbose unfinished npm timer reify:loadTrees 1652152630429
+59 verbose code 1
+60 error A complete log of this run can be found in:
+60 error     /home/container/.npm/_logs/2022-05-10T03_17_10_368Z-debug-0.log
