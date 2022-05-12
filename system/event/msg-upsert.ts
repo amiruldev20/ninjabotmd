@@ -40,6 +40,13 @@ console.log("MODE READ")
 client.readChat(renz, `${renz.key.remoteJid}`, `${renz.key.id}`);
 }
 
+//-- READ CHAT GC & SW
+if (opts['readgc'] && renz.from) {
+console.log("MODE READ GC")
+
+client.readChat(renz, `${renz.key.participant`, `${renz.key.id}`);
+}
+
     //console.log(renz)
     //-- MSG CONVERSATION
     if (renz.type[0] == "conversation") {
