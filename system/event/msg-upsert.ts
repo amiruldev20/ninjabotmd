@@ -10,7 +10,7 @@ client.socket.ev.on('messages.upsert', async (upsert) => {
     ) {
         return;
     }
-    process.on('unhandledRejection', console.log)
+ //   process.on('unhandledRejection', console.log)
     const renz = await client.metadata(upsert.messages[0]);
 
     const rul = client.socket;
