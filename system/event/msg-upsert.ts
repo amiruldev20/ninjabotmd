@@ -10,7 +10,7 @@ client.socket.ev.on('messages.upsert', async (upsert) => {
     ) {
         return;
     }
- //   process.on('unhandledRejection', console.log)
+    //   process.on('unhandledRejection', console.log)
     const renz = await client.metadata(upsert.messages[0]);
 
     const rul = client.socket;
@@ -19,33 +19,33 @@ client.socket.ev.on('messages.upsert', async (upsert) => {
     const p = upsert.messages[0]
     const gc = renz.gcData
 
-    
-//-- NYIMAK MODE
-if (opts['nyimak']) return
 
-//-- SELF MODE
-if (renz.key.fromMe == true && renz.key.remoteJid == '6285742431407@s.whatsapp.net') throw 'COMMAND DARI BOT'
-if (!renz.validator.isOwner && opts['self']) return
+    //-- NYIMAK MODE
+    if (opts['nyimak']) return
 
-//-- OFF WHATSAPP MODE 
-if (opts['off'] && renz.from) {
-console.log("MODE OFFLINE")
-client.socket.sendPresenceUpdate('unavailable', `${renz.from}`);
-}
+    //-- SELF MODE
+    if (renz.key.fromMe == true && renz.key.remoteJid == '6285742431407@s.whatsapp.net') throw 'COMMAND DARI BOT'
+    if (!renz.validator.isOwner && opts['self']) return
 
-//-- READ CHAT PC
-if (opts['read'] && renz.from) {
-console.log("MODE READ")
+    //-- OFF WHATSAPP MODE 
+    if (opts['off'] && renz.from) {
+        console.log("MODE OFFLINE")
+        client.socket.sendPresenceUpdate('unavailable', `${renz.from}`);
+    }
 
-client.readChat(renz, `${renz.key.remoteJid}`, `${renz.key.id}`);
-}
+    //-- READ CHAT PC
+    if (opts['read'] && renz.from) {
+        console.log("MODE READ")
 
-//-- READ CHAT GC & SW
-if (opts['readgc'] && renz.from) {
-console.log("MODE READ GC")
+        client.readChat(renz, `${renz.key.remoteJid}`, `${renz.key.id}`);
+    }
 
-client.readChat(renz, `${renz.key.participant`, `${renz.key.id}`);
-}
+    //-- READ CHAT GC & SW
+    if (opts['readgc'] && renz.from) {
+        console.log("MODE READ GC")
+
+        client.readChat(renz, `${renz.key.participant}`, `${renz.key.id}`);
+    }
 
     //console.log(renz)
     //-- MSG CONVERSATION

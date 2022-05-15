@@ -1,5 +1,16 @@
-// MODULE EXTERNAL 
+/*
+-----------------------
+Name: Ninjabot MD
+Author: Amirul Dev
+Github: amiruldev20
+Instagram: amiruldev20
+-----------------------
+Thanks to: Istiqmal
+-----------------------
+tambahin aja nama lu, hargai yang buat
+*/
 
+//-- MODULE EXTERNAL
 import core from 'file-type/core';
 import axios from 'axios';
 import Ffmpeg from 'fluent-ffmpeg';
@@ -13,31 +24,35 @@ const pino = require('pino');
 import * as baileys from '@adiwajshing/baileys';
 
 
-// MODULE INTERNAL 
+//-- MODULE INTERNAL 
 import { headers } from './util';
-//import * as renz from './renz';
 import { GetBuffer, ButtonConfig, Content, Proto, StickerConfig } from './client.d';
 
+// EXPORT CLIENT
 export default class Client {
-	chats: {
-		[k: string]: any;
-	};
-	baileys: typeof baileys;
-	messageType: { [k: string]: string };
-	constructor(public socket: baileys.WASocket) {
-		this.chats = {};
-		this.baileys = baileys;
-		this.messageType = Object.fromEntries(
-			Object.keys(baileys.proto)
-				.filter((a) => a.endsWith('Message') || a.includes('Conversation'))
-				.map((a) => {
-					const type = a[0].toLowerCase() + a.slice(1);
-					return [type.replace('Message', '').replace('conversation', 'text'), type];
-				}),
-		);
-	}
+  chats: {
+    [k: string]: any;
+  };
+  baileys: typeof baileys;
+  messageType: { [k: string]: string };
+  constructor(public socket: baileys.WASocket) {
+    this.chats = {};
+    this.baileys = baileys;
+    this.messageType = Object.fromEntries(
+      Object.keys(baileys.proto)
+        .filter((a) => a.endsWith('Message') || a.includes('Conversation'))
+        .map((a) => {
+          const type = a[0].toLowerCase() + a.slice(1);
+          return [type.replace('Message', '').replace('conversation', 'text'), type];
+        }),
+    );
+  }
 
-  //-- MULAI FUNCTION
+  /*
+  ------------------------------------
+  MEMULAI FUNCTION
+  ------------------------------------
+  */
 
   //-- SEND MESSAGE
   /**
@@ -46,7 +61,7 @@ export default class Client {
    * @param content 
    * @returns 
    */
-   public send = async (renz: Proto | string, content: Content): Promise<baileys.proto.WebMessageInfo> => {
+  public send = async (renz: Proto | string, content: Content): Promise<baileys.proto.WebMessageInfo> => {
     try {
       let property: Record<string, any> = content;
 
@@ -209,58 +224,15 @@ export default class Client {
   public reply = async (renz: Proto, text: string): Promise<baileys.proto.WebMessageInfo> =>
     this.send(renz, { text: util.logger.format(text).trim(), quoted: renz });
 
-  //-- SEND TEXT IMG & EXP --//
-  /**
-   * 
-   * @param renz 
-   * @param text 
-   * @param time 
-   * @param buf 
-   * @returns 
-   */
-  public sendText = async (renz: Proto, text: string, time: number, buf: string): Promise<baileys.proto.WebMessageInfo> =>
-    this.send(renz, {
-      text: text,
-      jpegThumbnail: buf,
-      ephemeralExpiration: time,
-      quoted: renz
-    });
-
-  //-- SEND TEXT THUMB --//
-  /**
-   * 
-   * @param renz 
-   * @param text 
-   * @param buffer 
-   * @returns 
-   */
-  public sendTt = async (renz: Proto, text: string, buffer: string): Promise<baileys.proto.WebMessageInfo> =>
-    this.send(renz, {
-      text: util.logger.format(text).trim(),
-      jpegThumbnail: buffer
-    });
-
-
-  //-- SEND REPL IMG --//
-  /**
-   * 
-   * @param renz 
-   * @param text 
-   * @param buffer 
-   * @returns 
-   */
-  public repImg = async (renz: Proto, text: string, buffer: string): Promise<baileys.proto.WebMessageInfo> =>
-    this.send(renz, { text: util.logger.format(text).trim(), jpegThumbnail: buffer, quoted: renz });
-
   //-- SEND VN --//
   /**
    * 
    * @param renz 
    * @param text 
    */
-  public sendVn = async (renz: Proto, text: string) => {
-    let url = await client.getBuffer(text)
-    this.send(renz, { audio: (await url.buffer) as baileys.WAMediaUpload, ptt: true, mimetype: 'audio/mpeg', quoted: renz })
+  public sendVn = async (renz: Proto, url: string) => {
+    let gurl = await client.getBuffer(url)
+    this.send(renz, { audio: (await gurl.buffer) as baileys.WAMediaUpload, ptt: true, mimetype: 'audio/mpeg', quoted: renz })
   }
 
   //-- SEND AUDIO --//
@@ -269,9 +241,9 @@ export default class Client {
    * @param renz 
    * @param text 
    */
-  public sendAud = async (renz: Proto, text: string) => {
-    let url = await client.getBuffer(text)
-    this.send(renz, { audio: (await url.buffer) as baileys.WAMediaUpload, ptt: false, mimetype: 'audio/mpeg', quoted: renz })
+  public sendAud = async (renz: Proto, url: string) => {
+    let gurl = await client.getBuffer(url)
+    this.send(renz, { audio: (await gurl.buffer) as baileys.WAMediaUpload, ptt: false, mimetype: 'audio/mpeg', quoted: renz })
   }
 
   //-- SEN STICKER --//
@@ -288,18 +260,6 @@ export default class Client {
       ...content
     }, { quoted: renz, ephemeralExpiration: 24 * 3600 })
   }
-
-  /*
-  //# SEND REACTION
-  public react = async (renz: any, reaction: string, key: string) => {
-  return this.socket.sendMessage(renz.from, {
-  react: {
-  text: reaction,
-  key: key
-  }
-  })
-  }
-  */
 
   //-- SEND MEDIA --//
   /**
@@ -346,23 +306,61 @@ export default class Client {
     }
   }
 
-  //-- SEND BUTTON --//
+  //-- SEND BUTTON 1 --//
   public sendBtn1 = async (renz: any, text: string, foot: string, text1: any, btn1: any) => {
     const buttons = [
-      {buttonId: btn1, buttonText: {displayText: text1}, type: 1}
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
     ]
-    
+
     const buttonMessage = {
-        text: text,
-        footer: foot,
-        buttons: buttons,
-        headerType: 1
+      text: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1
     }
-    
-    client.socket.sendMessage(renz.from, buttonMessage, { quoted : renz})
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
 
   }
-  
+
+  //-- SEND BUTTON 2 -- //
+  public sendBtn2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      text: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON 3 --//
+  public sendBtn3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 },
+      { buttonId: btn3, buttonText: { displayText: text3 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      text: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+
   //-- SEND HYDRATE 1 --- //
   public hy1 = async (renz: any, text: any, foot: any, turl1: any, url1: any, turl2: any, url2: any, btn1: any, id1: any) => {
     const templateButtons = [
@@ -395,122 +393,13 @@ export default class Client {
     return await this.socket.sendReadReceipt(typeof jid === 'object' ? jid.key.remoteJid! : jid, participant, [messageID])
   }
 
-  //# ADREPLY GC
-  public adGc = async (renz: any, text: any) => {
-    let gc = await this.getBuffer("https://telegra.ph/file/839791ed5d331b4450bcd.jpg")
-    let ban = gc.buffer
-
-    this.send(renz, {
-      text: text,
-      quoted: renz,
-      ephemeralExpiration: 24 * 3600,
-      contextInfo: {
-        forwardingScore: 1337,
-        isForwarded: true,
-        externalAdReply: {
-          title: set.name,
-          body: `Klik disini untuk wa owner`,
-          previewType: 'PHOTO',
-          thumbnail: ban,
-          sourceUrl: set.gc[0],
-        }
-      }
-    })
-
-  }
-
-
-  //# ADREPLY FULL 
-  public adFul = async (renz: any, text: any) => {
-    let gc = await this.getBuffer("https://telegra.ph/file/0b51e39c9d1aaa5404759.jpg")
-    let ban = gc.buffer
-    let gca = await this.getBuffer("https://telegra.ph/file/f8f6a733d8dd23acec9ab.jpg")
-    let bana = gca.buffer
-
-    this.send(renz, {
-      text: text,
-      //jpegThumbnail: `${bana}`,
-      quoted: renz,
-      ephemeralExpiration: 24 * 3600,
-      contextInfo: {
-        forwardingScore: 1337,
-        isForwarded: true,
-        externalAdReply: {
-          title: set.name,
-          body: `Klik disini untuk wa owner`,
-          previewType: 'PHOTO',
-          thumbnail: ban,
-          sourceUrl: "https://wa.me/",
-        }
-      }
-    })
-
-  }
-
-  //# SEND STIKER 
-  //public sendStimg
-
-
-  //# COPY N FORWARD 
-  /*
-  public copynfwd = async (renz: Proto, text: string, forwardingScore: boolean, content: Content): Promise<baileys.proto.WebMessageInfo> => {
-  let m = baileys.generateForwardMessageContent(text, !!forwardingScore)
-  let mtype = Object.keys(m)[0]
-  if (forwardingScore && typeof forwardingScore == 'number' && forwardingScore > 1) m[mtype].contextInfo.forwardingScore += forwardingScore
-   m = baileys.generateWAMessageFromContent(typeof renz === 'object' ? renz.key.remoteJid! : renz, m, { ...options, userJid: conn.user.id })
-  await conn.relayMessage(jid, m.message, { messageId: m.key.id, additionalAttributes: { ...options } })
-  return m
-  }
-  */
-
-  /*
-  public sendCar = async (renz: Proto, text: string, content: Content) => {
-  let contacts = []
-  for (let [number, name, isi1, isi2, isi3, isi4] of text) {
-  number = number.replace(/[^0-9]/g, '')
-  let njid = number + '@s.whatsapp.net'
-  let biz = await this.socket.getBusinessProfile(njid) || {}
-  // N:;${name.replace(/\n/g, '\\n').split(' ').reverse().join(';')};;;
-   
-  var vcard = `
-  BEGIN:VCARD
-  VERSION:3.0
-  N:Sy;Bot;;;
-  FN:${name.replace(/\n/g, '\\n')}
-  item1.TEL;waid=${number}:${PhoneNumber('+' + number).getNumber('international')}
-  item1.X-ABLabel:📌 ${isi1}
-  item2.EMAIL;type=INTERNET:${isi2}
-  item2.X-ABLabel:✉️ Email
-  item3.URL:${isi3}
-  item3.X-ABLabel:Website
-  item4.ADR:;;🇮🇩 Indonesia;;;;
-  item4.X-ABADR:ac
-  item4.X-ABLabel:📍 Region
-  item5.X-ABLabel:🔖 ${isi4}
-  END:VCARD`
-   
-  contacts.push({ vcard, displayName: name })
-  }
-  return await this.socket.sendMessage(typeof renz === 'object' ? renz.key.remoteJid! : renz, {
-  contacts: {
-  ...content,
-  displayName: (contacts.length > 1 ? `437 kontak` : contacts[0].displayName) || null,
-  contacts,
-  },
-   ...content
-  })
-  }
-  */
-
-  public sendSticker = async (renz: Proto, content: StickerConfig | Content): Promise<baileys.proto.WebMessageInfo> =>
-    this.send(renz, {
-      sticker: (await this.prepareSticker(
-        (content as StickerConfig).buffer,
-        (content as StickerConfig).exif ?? './src/ninja.exif',
-      )) as baileys.WAMediaUpload,
-      ...content,
-    });
-
+  /**
+   * 
+   * @param renz 
+   * @param content 
+   * @param buttons 
+   * @returns 
+   */
   public sendButton = async (renz: Proto, content: Content, buttons: ButtonConfig[]): Promise<baileys.proto.WebMessageInfo> => {
     try {
       function parseBtn(type: string, object: ButtonConfig) {
@@ -561,229 +450,229 @@ export default class Client {
     }
   };
 
-//-- END FUNC SEND MSG
+  //-- END FUNC SEND MSG
 
-	public throw = async (renz: Proto, error: any, cmd: string): Promise<baileys.proto.WebMessageInfo> => {
-		await this.send(set.numown[0] + '@s.whatsapp.net', {
-			text: `Error\nCommand: ${cmd}\n\n${error}`,
-		});
-		return client.reply(renz, set.resp.error);
-	};
+  public throw = async (renz: Proto, error: any, cmd: string): Promise<baileys.proto.WebMessageInfo> => {
+    await this.send(set.numown[0] + '@s.whatsapp.net', {
+      text: `Error\nCommand: ${cmd}\n\n${error}`,
+    });
+    return client.reply(renz, set.resp.error);
+  };
 
-	downloadMessage = async (renz: Proto, filename?: string) => {
-		try {
-			const values = Object.values(this.messageType);
-			const type = Object.keys(renz).find((a) => values.includes(a) && !a.includes('senderKey') && !a.includes('context'));
-			return this.getBuffer(
-				await this.baileys.downloadContentFromMessage(
-					renz[type as keyof Proto] as baileys.DownloadableMessage,
-					(type as string).replace(/Message/i, '').trim() as baileys.MediaType,
-				),
-				filename,
-			);
-		} catch (e) {
-			throw util.logger.format(e);
-		}
-	};
+  downloadMessage = async (renz: Proto, filename?: string) => {
+    try {
+      const values = Object.values(this.messageType);
+      const type = Object.keys(renz).find((a) => values.includes(a) && !a.includes('senderKey') && !a.includes('context'));
+      return this.getBuffer(
+        await this.baileys.downloadContentFromMessage(
+          renz[type as keyof Proto] as baileys.DownloadableMessage,
+          (type as string).replace(/Message/i, '').trim() as baileys.MediaType,
+        ),
+        filename,
+      );
+    } catch (e) {
+      throw util.logger.format(e);
+    }
+  };
 
-	public metadata = (renz: baileys.proto.IWebMessageInfo): Promise<Proto> => {
-		async function fallback(renz: baileys.proto.IWebMessageInfo) {
-			const proto: Proto = {} as Proto;
-			proto.type = [
-				Object.keys(renz.message!)[0],
-				Object.keys(renz.message!).find((a) => {
-					const b = a.toString().toLowerCase();
-					return !b.includes('senderkey') && !b.includes('context');
-				}),
-			]; // [0] for realType else [1]
+  public metadata = (renz: baileys.proto.IWebMessageInfo): Promise<Proto> => {
+    async function fallback(renz: baileys.proto.IWebMessageInfo) {
+      const proto: Proto = {} as Proto;
+      proto.type = [
+        Object.keys(renz.message!)[0],
+        Object.keys(renz.message!).find((a) => {
+          const b = a.toString().toLowerCase();
+          return !b.includes('senderkey') && !b.includes('context');
+        }),
+      ]; // [0] for realType else [1]
 
-			//-- NGANU 
+      //-- NGANU 
 
-			//-- PROTO BAILEYS
-			proto.baileys = renz.key?.id ? renz.key?.id.length === 16 || renz.key.id.startsWith("3EB0") : false
+      //-- PROTO BAILEYS
+      proto.baileys = renz.key?.id ? renz.key?.id.length === 16 || renz.key.id.startsWith("3EB0") : false
 
-			//-- PROTO MESSAGE
-			proto.message = proto.type[1] === 'ephemeralMessage' ? renz.message?.ephemeralMessage?.message : renz.message;
+      //-- PROTO MESSAGE
+      proto.message = proto.type[1] === 'ephemeralMessage' ? renz.message?.ephemeralMessage?.message : renz.message;
 
-			//-- PROTO DATA
-			proto.data =
-				typeof renz.message![proto.type[1] as keyof baileys.proto.IMessage] === 'object'
-					? Object.keys(renz.message![proto.type[1] as keyof baileys.proto.IMessage]!).includes('contextInfo')
-						? Object.keys(renz.message![proto.type[1] as keyof baileys.proto.IMessage]!).concat(
-							Object.keys((renz.message![proto.type[1] as keyof baileys.proto.IMessage]! as Record<string, any>).contextInfo),
-						)
-						: Object.keys(renz.message![proto.type[1] as keyof baileys.proto.IMessage]!)
-					: Object.keys(renz.message!);
+      //-- PROTO DATA
+      proto.data =
+        typeof renz.message![proto.type[1] as keyof baileys.proto.IMessage] === 'object'
+          ? Object.keys(renz.message![proto.type[1] as keyof baileys.proto.IMessage]!).includes('contextInfo')
+            ? Object.keys(renz.message![proto.type[1] as keyof baileys.proto.IMessage]!).concat(
+              Object.keys((renz.message![proto.type[1] as keyof baileys.proto.IMessage]! as Record<string, any>).contextInfo),
+            )
+            : Object.keys(renz.message![proto.type[1] as keyof baileys.proto.IMessage]!)
+          : Object.keys(renz.message!);
 
-			//-- PROTO STRING
-			proto.string =
-				proto.type[1] === 'conversation'
-					? renz.message?.conversation
-					: proto.data.includes('caption')
-						? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage]!.caption
-						: proto.type[1] === 'extendedTextMessage'
-							? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].text
-							: proto.type[1] === 'templateButtonReplyMessage'
-								? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].selectedId
-								: proto.type[1] === 'listResponseMessage'
-									? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].singleSelectReply.selectedRowId
-									: proto.type[1] === 'buttonsResponseMessage'
-										? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].selectedButtonId : '';
+      //-- PROTO STRING
+      proto.string =
+        proto.type[1] === 'conversation'
+          ? renz.message?.conversation
+          : proto.data.includes('caption')
+            ? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage]!.caption
+            : proto.type[1] === 'extendedTextMessage'
+              ? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].text
+              : proto.type[1] === 'templateButtonReplyMessage'
+                ? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].selectedId
+                : proto.type[1] === 'listResponseMessage'
+                  ? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].singleSelectReply.selectedRowId
+                  : proto.type[1] === 'buttonsResponseMessage'
+                    ? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].selectedButtonId : '';
 
-			//-- PROTO BODY
-			proto.body = renz.message![proto.type[1] as keyof baileys.proto.IMessage];
+      //-- PROTO BODY
+      proto.body = renz.message![proto.type[1] as keyof baileys.proto.IMessage];
 
-			//-- PROTO VIEW
-			proto.view = proto.body ? proto.body : renz.message![proto.type[1] as keyof baileys.proto.IMessage];
+      //-- PROTO VIEW
+      proto.view = proto.body ? proto.body : renz.message![proto.type[1] as keyof baileys.proto.IMessage];
 
-			proto.from = renz.key.remoteJid;
+      proto.from = renz.key.remoteJid;
 
-			proto.validator = {
-				msg: {
-					isText: proto.type[1] === 'conversation' || proto.type[1] === 'extendedTextMessage',
-					isMedia:
-						proto.type[1] === 'stickerMessage' ||
-						proto.type[1] === 'imageMessage' ||
-						proto.type[1] === 'audioMessage' ||
-						proto.type[1] === 'videoMessage' ||
-						proto.type[1] === 'documentMessage',
-				},
-				isOwner: false,
-				isGroup: proto.from!.includes('@g.us'),
-			};
+      proto.validator = {
+        msg: {
+          isText: proto.type[1] === 'conversation' || proto.type[1] === 'extendedTextMessage',
+          isMedia:
+            proto.type[1] === 'stickerMessage' ||
+            proto.type[1] === 'imageMessage' ||
+            proto.type[1] === 'audioMessage' ||
+            proto.type[1] === 'videoMessage' ||
+            proto.type[1] === 'documentMessage',
+        },
+        isOwner: false,
+        isGroup: proto.from!.includes('@g.us'),
+      };
 
-			proto.sender = proto.validator.isGroup == false ? renz.key.remoteJid : renz.key.participant;
+      proto.sender = proto.validator.isGroup == false ? renz.key.remoteJid : renz.key.participant;
 
-			proto.validator.isOwner =
-				set.numown.includes(proto.sender ? proto.sender.split('@')[0].split(':')[0] : '') || (renz.key.fromMe ?? false);
-			proto.client = {
-				name: client.socket.user.name,
-				jid: client.socket.user.id.split(':')[0] + '@s.whatsapp.net',
-			};
+      proto.validator.isOwner =
+        set.numown.includes(proto.sender ? proto.sender.split('@')[0].split(':')[0] : '') || (renz.key.fromMe ?? false);
+      proto.client = {
+        name: client.socket.user.name,
+        jid: client.socket.user.id.split(':')[0] + '@s.whatsapp.net',
+      };
 
-			proto.mentions =
-				proto.data.includes('contextInfo') && proto.data.includes('mentionedJid')
-					? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.mentionedJid
-					: undefined;
+      proto.mentions =
+        proto.data.includes('contextInfo') && proto.data.includes('mentionedJid')
+          ? (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.mentionedJid
+          : undefined;
 
-			proto.quotedMsg =
-				proto.data.includes('contextInfo') && proto.data.includes('quotedMessage')
-					? ({
-						key: {
-							remoteJid: proto.from,
-							fromMe:
-								(renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo
-									.participant === client.socket.user.id,
-							id: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.stanzaId,
-							participant: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.participant,
-							//participant: (renz.key.participant : client.socket.user.id) : renz.key.remoteJid,
-							//baileys: (renz.key.id && renz.key.id.length === 16 || renz.key.id.startsWith("3EB0") && renz.key.id.length === 12 || false as baileys.proto.IMessage),
-						},
-						message: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo
-							.quotedMessage,
-					} as {
-						key: baileys.proto.IMessageKey;
-						message: baileys.proto.IMessage;
-					} as Proto)
-					: undefined;
-			/*
-			proto.groupData = proto.validator.isGroup ? (await client.socket.groupMetadata(proto.from!)) ?? undefined : undefined;
-			*/
+      proto.quotedMsg =
+        proto.data.includes('contextInfo') && proto.data.includes('quotedMessage')
+          ? ({
+            key: {
+              remoteJid: proto.from,
+              fromMe:
+                (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo
+                  .participant === sock.user.id,
+              id: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.stanzaId,
+              participant: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.participant,
+              //participant: (renz.key.participant : sock.user.id) : renz.key.remoteJid,
+              //baileys: (renz.key.id && renz.key.id.length === 16 || renz.key.id.startsWith("3EB0") && renz.key.id.length === 12 || false as baileys.proto.IMessage),
+            },
+            message: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo
+              .quotedMessage,
+          } as {
+            key: baileys.proto.IMessageKey;
+            message: baileys.proto.IMessage;
+          } as Proto)
+          : undefined;
+      /*
+      proto.groupData = proto.validator.isGroup ? (await sock.groupMetadata(proto.from!)) ?? undefined : undefined;
+      */
 
-			//proto.gcData = proto.validator.isGroup ? (await client.socket.groupMetadata(proto.from!)) : false;
+      //proto.gcData = proto.validator.isGroup ? (await sock.groupMetadata(proto.from!)) : false;
 
-			proto.gcData = proto.validator.isGroup ? (await client.socket.groupMetadata(renz.key.remoteJid!)) : false;
+      proto.gcData = proto.validator.isGroup ? (await sock.groupMetadata(renz.key.remoteJid!)) : false;
 
-			proto.util = {
-				downMsg: async (filename: string | undefined) => await client.downloadMessage(proto.message! as Proto, filename!),
-				delMsg: (forAll = true) => {
-					if (forAll) {
-						return client.socket.sendMessage(proto.from!, {
-							delete: {
-								fromMe: true,
-								id: renz.key.id,
-								participant: renz.key.remoteJid,
-							},
-						});
-					} else {
-						return client.socket.sendMessage(proto.from!, {
-							delete: {
-								fromMe: true,
-								id: renz.key.id,
-								participant: renz.key.remoteJid,
-							},
-						});
-					}
-				},
-			};
+      proto.util = {
+        downMsg: async (filename: string | undefined) => await client.downloadMessage(proto.message! as Proto, filename!),
+        delMsg: (forAll = true) => {
+          if (forAll) {
+            return sock.sendMessage(proto.from!, {
+              delete: {
+                fromMe: true,
+                id: renz.key.id,
+                participant: renz.key.remoteJid,
+              },
+            });
+          } else {
+            return sock.sendMessage(proto.from!, {
+              delete: {
+                fromMe: true,
+                id: renz.key.id,
+                participant: renz.key.remoteJid,
+              },
+            });
+          }
+        },
+      };
 
-			proto.quotedMsg = proto.quotedMsg
-				? (((client.chats as Record<string, object>)[renz.key.remoteJid!] &&
-					(client.chats as Record<string, { messages: Record<string, object> }>)[renz.key.remoteJid!].messages[
-					(proto.quotedMsg as Proto).key.id!
-					]) as Proto) || (await fallback(proto.quotedMsg! as Proto))
-				: false;
-			return { ...renz, ...proto };
-		}
-		return fallback(renz);
-	};
+      proto.quotedMsg = proto.quotedMsg
+        ? (((client.chats as Record<string, object>)[renz.key.remoteJid!] &&
+          (client.chats as Record<string, { messages: Record<string, object> }>)[renz.key.remoteJid!].messages[
+          (proto.quotedMsg as Proto).key.id!
+          ]) as Proto) || (await fallback(proto.quotedMsg! as Proto))
+        : false;
+      return { ...renz, ...proto };
+    }
+    return fallback(renz);
+  };
 
 
-	//---- END ANU
-	private prepareSticker = async (content: GetBuffer, exifPath: string) => {
-		try {
-			const bufferData = await this.getBuffer(content),
-				Buffer = bufferData.buffer;
-			const input = util.autoPath(bufferData.ext),
-				output = util.autoPath('webp');
-			if (!existsSync('./tmp')) mkdirSync('tmp');
-			writeFileSync(input, Buffer);
+  //---- END ANU
+  private prepareSticker = async (content: GetBuffer, exifPath: string) => {
+    try {
+      const bufferData = await this.getBuffer(content),
+        Buffer = bufferData.buffer;
+      const input = util.autoPath(bufferData.ext),
+        output = util.autoPath('webp');
+      if (!existsSync('./tmp')) mkdirSync('tmp');
+      writeFileSync(input, Buffer);
 
-			if (bufferData.ext === 'webp') {
-				if (exifPath) {
-					return exec(`webpmux -set exif=${exifPath} ${input} ${input}`, (e) => {
-						if (e) throw e;
-						const saver = readFileSync(input);
-						unlinkSync(input);
-						return saver;
-					});
-				} else {
-					const saver = readFileSync(input);
-					unlinkSync(input);
-					return saver;
-				}
-			}
+      if (bufferData.ext === 'webp') {
+        if (exifPath) {
+          return exec(`webpmux -set exif=${exifPath} ${input} ${input}`, (e) => {
+            if (e) throw e;
+            const saver = readFileSync(input);
+            unlinkSync(input);
+            return saver;
+          });
+        } else {
+          const saver = readFileSync(input);
+          unlinkSync(input);
+          return saver;
+        }
+      }
 
-			return Ffmpeg(input)
-				.on('error', (e) => {
-					unlinkSync(input);
-					throw util.logger.format(new Error(e));
-				})
-				.videoCodec('libwebp')
-				.addInputOptions([
-					'-vf',
-					"scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse",
-				])
-				.toFormat('webp')
-				.save(output)
-				.on('end', () => {
-					if (exifPath) {
-						return exec(`webpmux -set exif=${exifPath} ${output} ${output}`, (e) => {
-							if (e) throw util.logger.format(e);
-							const saver = readFileSync(output);
-							unlinkSync(input);
-							unlinkSync(output);
-							return saver;
-						});
-					} else {
-						const saver = readFileSync(output);
-						unlinkSync(input);
-						unlinkSync(output);
-						return saver;
-					}
-				});
-		} catch (e) {
-			throw util.logger.format(e);
-		}
-	};
+      return Ffmpeg(input)
+        .on('error', (e) => {
+          unlinkSync(input);
+          throw util.logger.format(new Error(e));
+        })
+        .videoCodec('libwebp')
+        .addInputOptions([
+          '-vf',
+          "scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse",
+        ])
+        .toFormat('webp')
+        .save(output)
+        .on('end', () => {
+          if (exifPath) {
+            return exec(`webpmux -set exif=${exifPath} ${output} ${output}`, (e) => {
+              if (e) throw util.logger.format(e);
+              const saver = readFileSync(output);
+              unlinkSync(input);
+              unlinkSync(output);
+              return saver;
+            });
+          } else {
+            const saver = readFileSync(output);
+            unlinkSync(input);
+            unlinkSync(output);
+            return saver;
+          }
+        });
+    } catch (e) {
+      throw util.logger.format(e);
+    }
+  };
 }

@@ -18,7 +18,7 @@ export default async function CreateConnection() {
     const socket = makeWASocket({
       auth: state,
       printQRInTerminal: true,
-      browser: [set.ses, set.browser, '3.0.0'],
+      browser: [set.ses, `${set.browser}`, '3.0.0'],
       version: await util.waVersion(),
       logger: pino({
         level: 'fatal',
