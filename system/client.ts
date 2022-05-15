@@ -203,6 +203,29 @@ export default class Client {
     return `https://mmg.soff.tk/d/f/${urlmsg.split('/d/f/')[1]}/${encodeURIComponent(mediakei)}?type=${psn.mimetype.split('/')[0]}`
   }
 
+  //-- SET BIO WHATSAPP --//
+  /**
+   * 
+   * @param status 
+   * @returns 
+   */
+  public setBio = async (status: any) => {
+    sock.query({
+      tag: 'iq',
+      attrs: {
+        to: '@s.whatsapp.net',
+        type: 'set',
+        xmlns: 'status',
+      },
+      content: [{
+        tag: 'status',
+        attrs: {},
+        content: Buffer.from(status, 'utf-8')
+      }]
+    })
+    return status
+  }
+
   //-- SEND MSG --- //
   /**
    * 
@@ -360,6 +383,62 @@ export default class Client {
 
   }
 
+  //-- SEND BUTTON IMG 1 --//
+  public sendBtnImg1 = async (renz: any, text: string, foot: string, text1: any, btn1: any, img: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      image: img,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON IMG 2 --//
+  public sendBtnImg2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any, img: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      image: img,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON IMG 3 --//
+  public sendBtnImg3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any, img: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 },
+      { buttonId: btn3, buttonText: { displayText: text3 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      image: img,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
 
   //-- SEND HYDRATE 1 --- //
   public hy1 = async (renz: any, text: any, foot: any, turl1: any, url1: any, turl2: any, url2: any, btn1: any, id1: any) => {
