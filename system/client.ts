@@ -11,7 +11,7 @@ tambahin aja nama lu, hargai yang buat
 */
 
 //-- MODULE EXTERNAL
-import core from 'file-type/core';
+import core, { mimeTypes } from 'file-type/core';
 import axios from 'axios';
 import Ffmpeg from 'fluent-ffmpeg';
 import { Agent } from 'https';
@@ -27,6 +27,7 @@ import * as baileys from '@adiwajshing/baileys';
 //-- MODULE INTERNAL 
 import { headers } from './util';
 import { GetBuffer, ButtonConfig, Content, Proto, StickerConfig } from './client.d';
+import { TypeQueryNode } from 'typescript';
 
 // EXPORT CLIENT
 export default class Client {
@@ -330,6 +331,14 @@ export default class Client {
   }
 
   //-- SEND BUTTON 1 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param btn1 
+   */
   public sendBtn1 = async (renz: any, text: string, foot: string, text1: any, btn1: any) => {
     const buttons = [
       { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
@@ -347,6 +356,16 @@ export default class Client {
   }
 
   //-- SEND BUTTON 2 -- //
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param btn1 
+   * @param btn2 
+   */
   public sendBtn2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any) => {
     const buttons = [
       { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
@@ -365,6 +384,18 @@ export default class Client {
   }
 
   //-- SEND BUTTON 3 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param text3 
+   * @param btn1 
+   * @param btn2 
+   * @param btn3 
+   */
   public sendBtn3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any) => {
     const buttons = [
       { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
@@ -384,6 +415,15 @@ export default class Client {
   }
 
   //-- SEND BUTTON IMG 1 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param btn1 
+   * @param img 
+   */
   public sendBtnImg1 = async (renz: any, text: string, foot: string, text1: any, btn1: any, img: any) => {
     const buttons = [
       { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
@@ -402,6 +442,17 @@ export default class Client {
   }
 
   //-- SEND BUTTON IMG 2 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param btn1 
+   * @param btn2 
+   * @param img 
+   */
   public sendBtnImg2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any, img: any) => {
     const buttons = [
       { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
@@ -421,6 +472,19 @@ export default class Client {
   }
 
   //-- SEND BUTTON IMG 3 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param text3 
+   * @param btn1 
+   * @param btn2 
+   * @param btn3 
+   * @param img 
+   */
   public sendBtnImg3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any, img: any) => {
     const buttons = [
       { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
@@ -440,94 +504,386 @@ export default class Client {
 
   }
 
-  //-- SEND HYDRATE 1 --- //
-  public hy1 = async (renz: any, text: any, foot: any, turl1: any, url1: any, turl2: any, url2: any, btn1: any, id1: any) => {
-    const templateButtons = [
-      { index: 1, urlButton: { displayText: turl1, url: url1 } },
-      { index: 2, urlButton: { displayText: turl2, url: url2 } },
-      { index: 3, quickReplyButton: { displayText: btn1, id: id1 } },
+  //-- SEND BUTTON VIDEO 1 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param btn1 
+   * @param vid 
+   */
+  public sendBtnVid1 = async (renz: any, text: string, foot: string, text1: any, btn1: any, vid: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
     ]
 
+    const buttonMessage = {
+      video: vid,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON VIDEO 2 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param btn1 
+   * @param btn2 
+   * @param vid 
+   */
+  public sendBtnVid2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any, vid: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      video: vid,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON VIDEO 3 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param text3 
+   * @param btn1 
+   * @param btn2 
+   * @param btn3 
+   * @param vid 
+   */
+  public sendBtnVid3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any, vid: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 },
+      { buttonId: btn3, buttonText: { displayText: text3 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      video: vid,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON DOC 1 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param btn1 
+   * @param doc 
+   * @param name 
+   * @param mime 
+   * @param thumb 
+   */
+  public sendBtnDoc1 = async (renz: any, text: string, foot: string, text1: any, btn1: any, doc: any, name: any, mime: any, thumb: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      document: doc,
+      fileName: name,
+      mimetype: mime,
+      jpegThumbnail: thumb,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON DOC 2 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param btn1 
+   * @param btn2 
+   * @param doc 
+   * @param name 
+   * @param mime 
+   * @param thumb 
+   */
+  public sendBtnDoc2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any, doc: any, name: any, mime: any, thumb: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      document: doc,
+      fileName: name,
+      mimetype: mime,
+      jpegThumbnail: thumb,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON DOC 3 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param text3 
+   * @param btn1 
+   * @param btn2 
+   * @param btn3 
+   * @param doc 
+   * @param name 
+   * @param mime 
+   * @param thumb 
+   */
+  public sendBtnDoc3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any, doc: any, name: any, mime: any, thumb: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 },
+      { buttonId: btn3, buttonText: { displayText: text3 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      document: doc,
+      fileName: name,
+      mimetype: mime,
+      jpegThumbnail: thumb,
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON LOC 1 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param btn1 
+   * @param loc 
+   * @param thumb 
+   */
+  public sendBtnLoc1 = async (renz: any, text: string, foot: string, text1: any, btn1: any, loc: any, thumb: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      location: {
+        jpegThumbnail: thumb,
+      },
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON LOC 2 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param btn1 
+   * @param btn2 
+   * @param loc 
+   * @param thumb 
+   */
+  public sendBtnLoc2 = async (renz: any, text: string, foot: string, text1: any, text2: any, btn1: any, btn2: any, loc: any, thumb: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      location: {
+        jpegThumbnail: thumb,
+      },
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND BUTTON LOC 3 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param text1 
+   * @param text2 
+   * @param text3 
+   * @param btn1 
+   * @param btn2 
+   * @param btn3 
+   * @param loc 
+   * @param thumb 
+   */
+  public sendBtnLoc3 = async (renz: any, text: string, foot: string, text1: any, text2: any, text3: any, btn1: any, btn2: any, btn3: any, loc: any, thumb: any) => {
+    const buttons = [
+      { buttonId: btn1, buttonText: { displayText: text1 }, type: 1 },
+      { buttonId: btn2, buttonText: { displayText: text2 }, type: 1 },
+      { buttonId: btn3, buttonText: { displayText: text3 }, type: 1 }
+    ]
+
+    const buttonMessage = {
+      location: {
+        jpegThumbnail: thumb,
+      },
+      caption: text,
+      footer: foot,
+      buttons: buttons,
+      headerType: 1,
+    }
+
+    sock.sendMessage(renz.from, buttonMessage, { quoted: renz })
+
+  }
+
+  //-- SEND HYDRATE 1 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param turl 
+   * @param url 
+   * @param tcall 
+   * @param call 
+   * @param btn1 
+   * @param id1 
+   */
+  public hy1 = async (renz: any, text: any, foot: any, turl: any, url: any, tcall: any, call: any, btn1: any, id1: any) => {
+    const tbtn = [
+      {
+        index: 1, urlButton: {
+          displayText: turl,
+          url: url,
+        }
+      },
+      {
+        index: 2, callButton: {
+          displayText: tcall,
+          phoneNumber: call,
+        }
+      },
+      { index: 3, quickReplyButton: { displayText: btn1, id: id1 } }
+    ]
     const msg = {
       text: text,
       footer: foot,
-      templateButtons: templateButtons
+      templateButtons: tbtn
     }
-    return this.socket.sendMessage(renz.from, msg)
+    sock.sendMessage(renz.from, msg, { quoted: renz })
   }
 
-  //## GET PP 
-  public getpp = async (renz: Proto | string) => {
-    return await this.socket.profilePictureUrl(typeof renz === 'object' ? renz.key.remoteJid! : renz)
+  //-- SEND HYDRATE 2 --//
+  /**
+   * 
+   * @param renz 
+   * @param text 
+   * @param foot 
+   * @param turl 
+   * @param url 
+   * @param tcall 
+   * @param call 
+   * @param btn1 
+   * @param id1 
+   * @param btn2 
+   * @param id2 
+   */
+  public hy2 = async (renz: any, text: any, foot: any, turl: any, url: any, tcall: any, call: any, btn1: any, id1: any, btn2: any, id2: any) => {
+    const tbtn = [
+      {
+        index: 1, urlButton: {
+          displayText: turl,
+          url: url,
+        }
+      },
+      {
+        index: 2, callButton: {
+          displayText: tcall,
+          phoneNumber: call,
+        }
+      },
+      { index: 3, quickReplyButton: { displayText: btn1, id: id1 } },
+      { index: 4, quickReplyButton: { displayText: btn2, id: id2 } }
+    ]
+    const msg = {
+      text: text,
+      footer: foot,
+      templateButtons: tbtn
+    }
+    sock.sendMessage(renz.from, msg, { quoted: renz })
   }
-
-  //# BALAS PESAN 
-  public bls = async (renz: any, text: string) => {
-    return this.socket.sendMessage(renz.quotedMsg.string, { text: util.logger.format(text).trim() });
-  }
-
 
   //# READ CHAT 
   public readChat = async (jid: Proto, participant: string, messageID: string) => {
     return await this.socket.sendReadReceipt(typeof jid === 'object' ? jid.key.remoteJid! : jid, participant, [messageID])
   }
 
-  /**
-   * 
-   * @param renz 
-   * @param content 
-   * @param buttons 
-   * @returns 
-   */
-  public sendButton = async (renz: Proto, content: Content, buttons: ButtonConfig[]): Promise<baileys.proto.WebMessageInfo> => {
-    try {
-      function parseBtn(type: string, object: ButtonConfig) {
-        return 'title' in object
-          ? ({
-            ...object,
-            title: object.listTitle ?? undefined,
-            rowId: object.value ?? undefined,
-          } as {
-            title?: string | null;
-            description?: string | null;
-            rowId?: string | null;
-          })
-          : ({
-            [type.includes('reply') ? 'quickReplyButton' : type + 'Button']: {
-              displayText: object[type as keyof ButtonConfig],
-              [type.includes('reply') ? 'id' : type.includes('call') ? 'phoneNumber' : type]: object.value ?? '',
-            },
-          } as baileys.proto.IHydratedTemplateButton);
-      }
 
-      let hasList = false;
-      let buttonsData: baileys.proto.IHydratedTemplateButton[] | baileys.proto.ISection[] = [];
-
-      for (const a of buttons) {
-        const type = Object.keys(a)
-          .find((c) => c !== 'value')
-          ?.toLowerCase();
-        const parse = type ? parseBtn(type, a) : undefined;
-
-        if ('title' in a) {
-          hasList = true;
-          const rows: baileys.proto.IRow[] = [];
-          rows.push(parse as baileys.proto.IRow);
-          buttonsData.push({
-            rows,
-            title: a.title,
-          });
-        } else buttonsData = (buttonsData as baileys.proto.IHydratedTemplateButton[]).concat(parse as baileys.proto.IHydratedTemplateButton[]);
-      }
-
-      return this.send(renz, {
-        ...content,
-        ...{ [hasList ? 'sections' : 'templateButtons']: buttonsData },
-      });
-    } catch (e) {
-      throw util.logger.format(e);
-    }
-  };
 
   //-- END FUNC SEND MSG
 

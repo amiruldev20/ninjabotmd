@@ -2,6 +2,8 @@
 ## Base example bot whatsapp multi device library baileys
 ### script ini akan terus dikembangkan, apabila butuh bantuan silahkan wa.me/6281358919342
 
+!! ALL FUNCTION ADA PADA SYSTEM/CLIENT.TS, APABILA TIDAK FAHAM CARA PENGGUNAAN, SILAHKAN WA SAYA DIATAS
+
 ### remake? silahkan asalkan cantumkan sumber :)
 <a href="https://visitor-badge.glitch.me/badge?page_id=amiruldev20/ninjabotmd"><img title="Visitor" src="https://visitor-badge.glitch.me/badge?page_id=amiruldev20/ninjabotmd"></a>
 <a href="https://github.com/amiruldev20/ninjabotmd/network/members"><img title="Forks" src="https://img.shields.io/github/forks/amiruldev20/ninjabotmd?label=Forks&color=blue&style=flat-square"></a>
