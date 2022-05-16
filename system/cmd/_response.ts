@@ -2,7 +2,7 @@
 import util from 'util';
 import { red, green, yellow, blue, magenta, cyan } from 'chalk';
 import * as baileys from '@adiwajshing/baileys';
-import { isPropertyAccessChain } from 'typescript';
+import { isConstructorDeclaration, isPropertyAccessChain } from 'typescript';
 import fs from 'fs';
 import { createHash } from 'crypto';
 import * as wsf from 'wa-sticker-formatter';
@@ -27,7 +27,14 @@ console.log("ISGROUP", renz.validator.isGroup)
 */
 
 //-- PUSH DB
-if (dbusr == false) {
+//console.log(renz)
+if (renz.baileys == true) return console.log('BAILEYS')
+
+
+if (global.cekusr == true) {
+console.log("JID TELAH TERDAFTAR")
+} else {
+console.log("PUSH DB")
 usr.push({
 id: renz.sender,
 nama: renz.pushName,
@@ -56,7 +63,7 @@ sn: `NINJA-${createHash('md5').update(`${renz.sender}`).digest('hex')}`,
 fs.writeFileSync('./database/user.json', JSON.stringify(usr))
 }
 
-//-- ISI FIRST CHAT 
+//-- ISI FIRST CHAT --//
 let date: any = new Date();
 if (renz.validator.isGroup == false) {
 if (date - dbusr.pc < 60000) return

@@ -1016,7 +1016,7 @@ export default class Client {
 
       //proto.gcData = proto.validator.isGroup ? (await sock.groupMetadata(proto.from!)) : false;
 
-      proto.gcData = proto.validator.isGroup ? (await sock.groupMetadata(renz.key.remoteJid!)) : false;
+      proto.gcData = proto.validator.isGroup ? (await client.socket.groupMetadata(renz.key.remoteJid!)) : false;
 
       proto.util = {
         downMsg: async (filename: string | undefined) => await client.downloadMessage(proto.message! as Proto, filename!),
