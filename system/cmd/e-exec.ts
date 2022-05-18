@@ -23,7 +23,10 @@ const os = require('os')
 const fs = require("fs")
 const pino = require('pino')
 
-cmd.on(
+const client = global.client
+const set = global.set
+
+global.cmd.on(
 	['>', '=>'], ['owner'], async (renz, {
 		text, cmd
 	}) => {
@@ -49,69 +52,72 @@ cmd.on(
 	owner: true,
 	wait: false,
 	prefix: false,
-});
-cmd.on(
-	['$'], ['owner'], async (renz, {
-		query, text
-	}) => {
-	let o
-	try {
-		o = await exec(query)
-	} catch (e) {
-		o = e
-	} finally {
-		let {
-			stdout, stderr
-		} = o
-		if (stdout.trim()) client.reply(renz, stdout)
-		if (stderr.trim()) client.reply(renz, stderr)
-	}
-}, {
-	owner: true,
-	wait: false,
-	prefix: false,
-});
-cmd.on(
-	['push'], ['owner'], async (renz, {
-		query, text
-	}) => {
-	let anu = `git add . && git commit -m "${query}" && git push`
-	let o
-	try {
-		o = await exec(anu)
-	} catch (e) {
-		o = e
-	} finally {
-		let {
-			stdout, stderr
-		} = o
-		if (stdout.trim()) client.reply(renz, stdout)
-		if (stderr.trim()) client.reply(renz, stderr)
-	}
-}, {
-	owner: true,
-	wait: false,
-	prefix: false,
-});
-cmd.on(
-	['pull'], ['owner'], async (renz, {
-		query, text
-	}) => {
-	let anu = `git pull`
-	let o
-	try {
-		o = await exec(anu)
-	} catch (e) {
-		o = e
-	} finally {
-		let {
-			stdout, stderr
-		} = o
-		if (stdout.trim()) client.reply(renz, stdout)
-		if (stderr.trim()) client.reply(renz, stderr)
-	}
-}, {
-	owner: true,
-	wait: false,
-	prefix: false,
-});
+})
+
+	.on(
+		['$'], ['owner'], async (renz, {
+			query, text
+		}) => {
+		let o
+		try {
+			o = await exec(query)
+		} catch (e) {
+			o = e
+		} finally {
+			let {
+				stdout, stderr
+			} = o
+			if (stdout.trim()) client.reply(renz, stdout)
+			if (stderr.trim()) client.reply(renz, stderr)
+		}
+	}, {
+		owner: true,
+		wait: false,
+		prefix: false,
+	})
+
+	.on(
+		['push'], ['owner'], async (renz, {
+			query, text
+		}) => {
+		let anu = `git add . && git commit -m "${query}" && git push`
+		let o
+		try {
+			o = await exec(anu)
+		} catch (e) {
+			o = e
+		} finally {
+			let {
+				stdout, stderr
+			} = o
+			if (stdout.trim()) client.reply(renz, stdout)
+			if (stderr.trim()) client.reply(renz, stderr)
+		}
+	}, {
+		owner: true,
+		wait: false,
+		prefix: false,
+	})
+
+	.on(
+		['pull'], ['owner'], async (renz, {
+			query, text
+		}) => {
+		let anu = `git pull`
+		let o
+		try {
+			o = await exec(anu)
+		} catch (e) {
+			o = e
+		} finally {
+			let {
+				stdout, stderr
+			} = o
+			if (stdout.trim()) client.reply(renz, stdout)
+			if (stderr.trim()) client.reply(renz, stderr)
+		}
+	}, {
+		owner: true,
+		wait: false,
+		prefix: false,
+	});

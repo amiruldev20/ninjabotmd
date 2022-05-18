@@ -7,8 +7,8 @@ import axios from 'axios';
 
 //-- MODULE INTERNAL --//
 import Client from './client';
-import { isPropertyAccessChain } from 'typescript';
-import { createConnection } from 'net';
+// import { isPropertyAccessChain } from 'typescript';
+// import { createConnection } from 'net';
 
 export default async function CreateConnection() {
   try {
@@ -176,9 +176,11 @@ END:VCARD`
         return util.logger.info(`Saving database progress > ${database.saveOn} / ${triggerSave}`);
       }
     });
-    process.on('uncaughException', console.error)
+    
     return new Client(socket);
   } catch (e) {
     throw util.logger.format(e);
   }
 }
+
+process.on('uncaughException', console.error)
