@@ -3,11 +3,12 @@ import { spawn } from "child_process"
 import { join } from "path"
 import chalk from "chalk"
 
-const FOLDER = './system/cmd'
-const CMD_FOLDER_FROM_THIS_DIRNAME = './cmd'
+const CMD_FOLDER = './system/cmd'
+// const CMD_FOLDER_FROM_THIS_DIRNAME = './cmd'
 const FILTER_FILE = (file: string) => /\.ts$/.test(file)
 
-export async function loadFile (folder: PathLike = FOLDER) {
+export async function loadFile (folder: PathLike = CMD_FOLDER) {
+    const FOLDER_FROM_THIS_DIRNAME = (folder as string).replace('./system/', './')
     const files = readdirSync(folder)
     console.log(files)
     let cmds: any[] = []
@@ -17,7 +18,7 @@ export async function loadFile (folder: PathLike = FOLDER) {
             console.log(chalk.red(`${file} is not valid`))
             continue
         }
-        const cmd = await import(`${CMD_FOLDER_FROM_THIS_DIRNAME}/${file}`)
+        const cmd = await import(`${FOLDER_FROM_THIS_DIRNAME}/${file}`)
         if (cmd) cmds.push('default' in cmd ? cmd.default : cmd)
     }
     return cmds

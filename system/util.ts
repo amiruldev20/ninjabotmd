@@ -168,15 +168,10 @@ export async function run (): Promise<void> {
 		logger.database('Database loaded');
 		global.client = await CreateConnection();
 		global.cmd = new CommandHandler();
+
 		await loadFile();
-		// for (const a of readdirSync('./system/cmd')) {
-		// 	await
-		// 		import(`./cmd/${a}`);
-		// }
-		for (const a of readdirSync('./system/event')) {
-			await
-				import(`./event/${a}`);
-		}
+		await loadFile('./system/event')
+		
 		client.socket.ev.on('messages.upsert', async (upsert) => {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;
