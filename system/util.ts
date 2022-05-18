@@ -169,9 +169,9 @@ export async function run (): Promise<void> {
 		global.client = await CreateConnection();
 		global.cmd = new CommandHandler();
 
-		await loadFile();
+		await loadFile('./system/cmd');
 		await loadFile('./system/event')
-		
+
 		client.socket.ev.on('messages.upsert', async (upsert) => {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;
