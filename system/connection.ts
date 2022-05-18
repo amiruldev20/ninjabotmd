@@ -15,11 +15,11 @@ export default async function CreateConnection() {
     database.saveOn = database?.saveOn ?? 0;
 
     util.logger.info('Connecting to whatsapp server...');
-    const { state, saveState } = useSingleFileAuthState(`./database/${opts._[0] || 'ninjabot'}.json`);
+    const { state, saveState } = useSingleFileAuthState(`./session/${opts._[0] || 'ninjabot'}.json`);
     const socket = makeWASocket({
       auth: state,
       printQRInTerminal: true,
-      browser: [set.ses, `${set.browser}`, '3.0.0'],
+      browser: [set.ses, 'Firefox', '3.0.0'],
       version: await util.waVersion(),
       logger: pino({
         level: 'fatal',
