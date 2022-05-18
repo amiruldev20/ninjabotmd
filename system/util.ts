@@ -1,10 +1,10 @@
-
+import fs from 'fs';
 import chalk from 'chalk';
 import set from '../database/settings.json';
 import FormData from 'form-data';
 import CommandHandler from './cmd';
 import CreateConnection from './connection';
-const yargs = require('yargs');
+import { loadFile } from './CommandFile';
 import {
 	format
 }
@@ -18,33 +18,33 @@ import axios, {
 }
 	from 'axios';
 
-const fs = require('fs');
+const yargs = require('yargs');
 //--- NGANU DATABASE ---//
-let aviewonce = JSON.parse(fs.readFileSync('./database/aviewonce.json'))
-let asticker = JSON.parse(fs.readFileSync('./database/asticker.json'))
-let usr = JSON.parse(fs.readFileSync('./database/user.json'))
+let aviewonce = JSON.parse(fs.readFileSync('./database/aviewonce.json', 'utf-8'));
+let asticker = JSON.parse(fs.readFileSync('./database/asticker.json', 'utf-8'));
+let usr = JSON.parse(fs.readFileSync('./database/user.json', 'utf-8'));
 
-export async function delay(ms: number): Promise<void> {
+export async function delay (ms: number): Promise<void> {
 	new Promise((resolve) => setTimeout(resolve, ms));
 }
-export function wings(text: string) {
+export function wings (text: string) {
 	return `${set.unicode.wings[0]}*${text.trim()}*${set.unicode.wings[1]}`;
 }
-export function isUrl(text: string): boolean {
+export function isUrl (text: string): boolean {
 	return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\/=]*)/gi.test(text);
 }
-export function parseRegex(text: string): string {
+export function parseRegex (text: string): string {
 	return text.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
 }
-export function randomize<T>(content: any[] | number): T | number {
+export function randomize<T> (content: any[] | number): T | number {
 	if (content instanceof Array) {
 		return content[Math.floor(Math.random() * content.length)];
 	} else {
 		return Math.floor(Math.random() * content);
-		console.log(client)
+		// console.log(client)
 	}
 }
-export function autoPath(format: string, filename?: string, useTemp = true): string {
+export function autoPath (format: string, filename?: string, useTemp = true): string {
 	if (useTemp && !existsSync(global.set.tempDir.split('/')[1])) mkdirSync(global.set.tempDir.split('/')[1]);
 	const basePath = useTemp ? global.set.tempDir : '';
 	return `${basePath}${filename
@@ -56,7 +56,7 @@ export function autoPath(format: string, filename?: string, useTemp = true): str
 		: 'clk' + Date.now()
 		}${format && !format.includes('.') ? '.' + format : format}`;
 }
-export function headers(additional?: AxiosRequestConfig, additionalHeaders?: AxiosRequestHeaders) {
+export function headers (additional?: AxiosRequestConfig, additionalHeaders?: AxiosRequestHeaders) {
 	return {
 		headers: {
 			'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36 Edg/99.0.1150.30',
@@ -67,7 +67,7 @@ export function headers(additional?: AxiosRequestConfig, additionalHeaders?: Axi
 		...additional,
 	};
 }
-export async function waVersion(): Promise<[number, number, number]> {
+export async function waVersion (): Promise<[number, number, number]> {
 	const defaultVersion: [number, number, number] = [2, 2022, 12];
 	try {
 		const request: AxiosResponse = await axios.get('https://web.whatsapp.com/check-update?version=1&platform=web', headers());
@@ -84,7 +84,7 @@ export async function waVersion(): Promise<[number, number, number]> {
 		return defaultVersion;
 	}
 }
-export function parseJson(json: object, options?: {
+export function parseJson (json: object, options?: {
 	ignoreValue?: any[];
 	ignoreKey?: string[];
 	header?: string;
@@ -140,7 +140,8 @@ export function parseJson(json: object, options?: {
 	];
 	return compile.join('');
 }
-export async function run(): Promise<void> {
+
+export async function run (): Promise<void> {
 	try {
 		console.clear();
 		console.log(chalk.green('Starting running bot...'));
@@ -167,10 +168,11 @@ export async function run(): Promise<void> {
 		logger.database('Database loaded');
 		global.client = await CreateConnection();
 		global.cmd = new CommandHandler();
-		for (const a of readdirSync('./system/cmd')) {
-			await
-				import(`./cmd/${a}`);
-		}
+		await loadFile();
+		// for (const a of readdirSync('./system/cmd')) {
+		// 	await
+		// 		import(`./cmd/${a}`);
+		// }
 		for (const a of readdirSync('./system/event')) {
 			await
 				import(`./event/${a}`);
@@ -179,15 +181,15 @@ export async function run(): Promise<void> {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;
 			}
-	
-		const renz = await client.metadata(upsert.messages[0])
-//console.log(renz)
-		var obj = usr.some((val: { id: any }) => val.id == renz.sender)
-        global.cekusr = obj
-	   	global.dbusr = obj == true ? usr.find((v: { id: string }) => v.id == renz.sender) : false
-		global.sock = client.socket
-console.log(dbusr)
-		console.log(chalk.gray(`
+
+			const renz = await client.metadata(upsert.messages[0])
+			//console.log(renz)
+			var obj = usr.some((val: { id: any }) => val.id == renz.sender)
+			global.cekusr = obj
+			global.dbusr = obj == true ? usr.find((v: { id: string }) => v.id == renz.sender) : false
+			global.sock = client.socket
+			console.log(dbusr)
+			console.log(chalk.gray(`
 -=[ CEK USER ]=- 
 ${renz.sender} • ${cekusr}
 ${renz.pushName}

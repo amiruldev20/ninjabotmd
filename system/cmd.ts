@@ -17,7 +17,7 @@ export default class CommandHandler {
     tag: string[],
     callback: (renz: Proto, property: ICommandHandler.CommandProperty) => Promise<any> | any,
     additonal?: ICommandHandler.AdditonalEvent | ICommandHandler.Event,
-  ): void => {
+  ): CommandHandler => {
     const ev: ICommandHandler.Event = {
       name: (cmd as string[])[0].toString(),
       cmd: {
@@ -45,6 +45,7 @@ export default class CommandHandler {
     );
     ev.index = this.commandList.length;
     this.commandList.push(ev);
+    return this;
   };
 
   public emit = (renz: Proto): void => {
@@ -113,7 +114,7 @@ export default class CommandHandler {
 
   public getAccess = (renz: Proto, event: ICommandHandler.CommandProperty): void | Promise<proto.WebMessageInfo> | 200 => {
     let CONFIG!: [string | string[] | boolean, string];
-    
+
     if (event.event?.regist && dbusr.regist == false) CONFIG = [event.event.regist!, 'regist'];
     if (event.event?.query && event.query.length === 0) CONFIG = [event.event.query!, 'query'];
     if (event.event?.group && !renz.validator.isGroup) CONFIG = [event.event.group!, 'group'];
@@ -162,7 +163,7 @@ export default class CommandHandler {
             ...this.commandList[ev.event.index],
             ...property,
           };
-          
+
           return this.commandList[ev.event.index];
         },
       };

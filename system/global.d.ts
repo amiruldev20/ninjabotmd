@@ -1,6 +1,7 @@
 import Client from './client';
 import Command from './cmd';
-declare global {
+
+export declare global {
 	var set: typeof import('../database/settings.json');
 	var util: typeof import('./util');
 	var database: {
