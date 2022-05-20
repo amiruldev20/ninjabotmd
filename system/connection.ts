@@ -179,8 +179,9 @@ END:VCARD`
     
     return new Client(socket);
   } catch (e) {
-    throw util.logger.format(e);
+    console.log("connection")
+ //   throw util.logger.format(e);
   }
 }
 
-process.on('uncaughException', console.error)
+//process.on('uncaughException', console.error)
