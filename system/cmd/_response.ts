@@ -265,7 +265,8 @@ MSG: ${renz.string}`)
 
     else if (renz.type[0] == "senderKeyDistributionMessage") {
         console.log(`\n\n
-${green("GROUP: ")}${green(gc?.subject)}
+STORY WHATSAPP
+${green("GROUP: ")}${green(isGc ? gc?.subject : 'FALSE')}
 ${cyan("NAME: ")}${cyan(p.pushName)}
 ${green("JID: ")}${green(p.key.remoteJid)}
 ${magenta("ID: ")}${magenta(p.key.id)}
