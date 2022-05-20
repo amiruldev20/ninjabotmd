@@ -23,6 +23,7 @@ client.socket.ev.on('messages.upsert', async (upsert: { messages: baileys.proto.
     }
     // process.on('unhandledRejection', console.log)
     process.setMaxListeners(0);
+    if (!global.sock) return
     const renz = await client.metadata(upsert.messages[0]);
 
     //-- CONSOLE ALL --//
