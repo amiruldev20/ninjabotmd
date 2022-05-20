@@ -997,7 +997,7 @@ export default class Client {
               remoteJid: proto.from,
               fromMe:
                 (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo
-                  .participant === sock.user.id,
+                  .participant === client.socket.user.id,
               id: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.stanzaId,
               participant: (renz.message as Record<keyof baileys.proto.IMessage, any>)[proto.type[1] as keyof baileys.proto.IMessage].contextInfo.participant,
               //participant: (renz.key.participant : sock.user.id) : renz.key.remoteJid,
