@@ -253,8 +253,8 @@ MSG: ${renz.string}`)
     }
     else if (renz.type[0] == "protocolMessage") {
         console.log(`\n\n
-${green("GROUP: ")}${green(gc?.subject)}
-${cyan("NAME: ")}${cyan(p.pushName)} MEMBUAT STATUS!!
+${green("GROUP: ")}${green(isGc ? gc?.subject: 'FALSE')}
+${cyan("NAME: ")}${cyan(p.pushName)} MENGHAPUS STORY!!
 ${green("JID: ")}${green(p.key.remoteJid)}
 ${magenta("ID: ")}${magenta(p.key.id)}
 ${cyan("PARTICIPANT: ")}${cyan(p.key.participant)}
@@ -265,9 +265,8 @@ MSG: ${renz.string}`)
 
     else if (renz.type[0] == "senderKeyDistributionMessage") {
         console.log(`\n\n
-STORY WHATSAPP
 ${green("GROUP: ")}${green(isGc ? gc?.subject : 'FALSE')}
-${cyan("NAME: ")}${cyan(p.pushName)}
+${cyan("NAME: ")}${cyan(p.pushName)} MEMBUAT STORY!!
 ${green("JID: ")}${green(p.key.remoteJid)}
 ${magenta("ID: ")}${magenta(p.key.id)}
 ${cyan("PARTICIPANT: ")}${cyan(p.key.participant)}
