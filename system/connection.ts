@@ -179,7 +179,7 @@ END:VCARD`
     
     return new Client(socket);
   } catch (e) {
-   return console.log("connection")
+   throw console.log("connection")
 // throw util.logger.format(e);
   }
 }
