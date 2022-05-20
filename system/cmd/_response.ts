@@ -34,6 +34,7 @@ client.socket.ev.on('messages.upsert', async (upsert: { messages: baileys.proto.
 
     //-- PUSH DB
     //console.log(renz)
+    /*
     if (renz.baileys == true) return console.log('BAILEYS')
 
 
@@ -81,6 +82,7 @@ untuk membuat stiker otomatis, silahkan klik tombol
 *NB:* BOT INI BELUM JADI`, `${set.name} 2022`, 'ON STICKER', '#on sticker')
         dbusr.pc = date * 1
     }
+    */
     /*
     //-- AUTO STICKER PC 
     if (renz.type[0] == "imageMessage") {
