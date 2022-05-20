@@ -59,7 +59,7 @@ export default class CommandHandler {
         });
     } catch (e) {
     //  throw util.logger.format(e);
-      return console.log("tes")
+      return
     }
   };
 
