@@ -176,9 +176,12 @@ export async function run (): Promise<void> {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;
 			}
-
+try {
 			const renz = await client.metadata(upsert.messages[0])
 			//console.log(renz)
+			} catch {
+				console.log("ERR UTIL")
+			}
 			var obj = usr.some((val: { id: any }) => val.id == renz.sender)
 			global.cekusr = obj
 			global.dbusr = obj == true ? usr.find((v: { id: string }) => v.id == renz.sender) : false
