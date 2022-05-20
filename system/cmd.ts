@@ -58,7 +58,8 @@ export default class CommandHandler {
           ...ev,
         });
     } catch (e) {
-      throw util.logger.format(e);
+    //  throw util.logger.format(e);
+      return console.log("tes")
     }
   };
 
