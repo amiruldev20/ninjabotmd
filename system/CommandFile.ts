@@ -40,7 +40,7 @@ export async function loadFile(folder: PathLike = CMD_FOLDER) {
 export function checkFile(file: PathLike) {
     return new Promise<boolean>((resolve) => {
         if (!file) return resolve(false)
-        const check = spawn('tsc', [`"${file as string}"`, '"./system/global.d.ts"', '--noEmit', '--esModuleInterop', '--skipLibCheck'], {
+        const check = spawn('tsc', [`"${file as string}"`, './system/global.d.ts', '--noEmit', '--esModuleInterop', '--skipLibCheck'], {
             shell: true,
             stdio: ['inherit', 'inherit', 'inherit']
         })

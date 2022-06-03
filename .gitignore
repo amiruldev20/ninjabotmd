@@ -130,6 +130,7 @@ dist
 .pnp.*
 
 package-lock.json
+yarn.lock
 session/*.json
 system/lib/*.json
 ./config
