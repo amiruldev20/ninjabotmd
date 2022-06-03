@@ -1,3 +1,16 @@
+/*
+-----------------------
+Name: Ninjabot MD
+Author: Amirul Dev
+Github: amiruldev20
+Instagram: amiruldev20
+-----------------------
+Thanks to: Istiqmal
+-----------------------
+tambahin aja nama lu, hargai yang buat
+*/
+
+//-- MODULE EXTERNAL
 import { PathLike, readdirSync } from "fs"
 import { spawn } from "child_process"
 import { join } from "path"
@@ -7,7 +20,7 @@ const CMD_FOLDER = './system/cmd'
 // const CMD_FOLDER_FROM_THIS_DIRNAME = './cmd'
 const FILTER_FILE = (file: string) => /\.ts$/.test(file)
 
-export async function loadFile (folder: PathLike = CMD_FOLDER) {
+export async function loadFile(folder: PathLike = CMD_FOLDER) {
     const FOLDER_FROM_THIS_DIRNAME = (folder as string).replace('./system/', './')
     const files = readdirSync(folder)
     console.log(files)
@@ -24,7 +37,7 @@ export async function loadFile (folder: PathLike = CMD_FOLDER) {
     return cmds
 }
 
-export function checkFile (file: PathLike) {
+export function checkFile(file: PathLike) {
     return new Promise<boolean>((resolve) => {
         if (!file) return resolve(false)
         const check = spawn('tsc', [`"${file as string}"`, '"./system/global.d.ts"', '--noEmit', '--esModuleInterop', '--skipLibCheck'], {

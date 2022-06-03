@@ -1015,10 +1015,10 @@ export default class Client {
       */
 
       //proto.gcData = proto.validator.isGroup ? (await sock.groupMetadata(proto.from!)) : false;
-try {
-      proto.gcData = proto.validator.isGroup ? (await client.socket.groupMetadata(renz.key.remoteJid!)) : false;
-} catch {
-}
+      try {
+        proto.gcData = proto.validator.isGroup ? (await client.socket.groupMetadata(renz.key.remoteJid!)) : false;
+      } catch {
+      }
       proto.util = {
         downMsg: async (filename: string | undefined) => await client.downloadMessage(proto.message! as Proto, filename!),
         delMsg: (forAll = true) => {

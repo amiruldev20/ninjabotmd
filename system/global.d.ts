@@ -1,3 +1,16 @@
+/*
+-----------------------
+Name: Ninjabot MD
+Author: Amirul Dev
+Github: amiruldev20
+Instagram: amiruldev20
+-----------------------
+Thanks to: Istiqmal
+-----------------------
+tambahin aja nama lu, hargai yang buat
+*/
+
+//-- MODULE INTERNAL
 import Client from './client';
 import Command from './cmd';
 
@@ -9,11 +22,8 @@ export declare global {
 	};
 	var client: Client;
 	var cmd: Command;
-	var aviewonce: any,
-	var asticker: any,
-	var usr: any,
 	var opts: any,
-	var cekusr: any,
-	var dbusr: any;
 	var sock: any;
+	var renz: proto;
+	var db: any;
 }

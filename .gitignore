@@ -131,4 +131,5 @@ dist
 
 package-lock.json
 session/*.json
+system/lib/*.json
 ./config

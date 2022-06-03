@@ -1,3 +1,16 @@
+/*
+-----------------------
+Name: Ninjabot MD
+Author: Amirul Dev
+Github: amiruldev20
+Instagram: amiruldev20
+-----------------------
+Thanks to: Istiqmal
+-----------------------
+tambahin aja nama lu, hargai yang buat
+*/
+
+//-- MODULE INTERNAL
 import { Proto } from './client.d';
 
 export namespace ICommandHandler {

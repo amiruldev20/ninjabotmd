@@ -1,4 +1,19 @@
+/*
+-----------------------
+Name: Ninjabot MD
+Author: Amirul Dev
+Github: amiruldev20
+Instagram: amiruldev20
+-----------------------
+Thanks to: Istiqmal
+-----------------------
+tambahin aja nama lu, hargai yang buat
+*/
+
+//-- MODULE EXTERNAL
 import { proto } from '@adiwajshing/baileys';
+
+//-- MODULE INTERNAL
 import { Proto } from './client.d';
 import { ICommandHandler } from './cmd.d';
 
@@ -58,7 +73,7 @@ export default class CommandHandler {
           ...ev,
         });
     } catch (e) {
-    //  throw util.logger.format(e);
+      //  throw util.logger.format(e);
       return
     }
   };
@@ -116,7 +131,7 @@ export default class CommandHandler {
   public getAccess = (renz: Proto, event: ICommandHandler.CommandProperty): void | Promise<proto.WebMessageInfo> | 200 => {
     let CONFIG!: [string | string[] | boolean, string];
 
-    if (event.event?.regist && dbusr.regist == false) CONFIG = [event.event.regist!, 'regist'];
+    if (event.event?.regist && db.usr.regist == false) CONFIG = [event.event.regist!, 'regist'];
     if (event.event?.query && event.query.length === 0) CONFIG = [event.event.query!, 'query'];
     if (event.event?.group && !renz.validator.isGroup) CONFIG = [event.event.group!, 'group'];
     if (event.event?.owner && !renz.validator.isOwner) CONFIG = [event.event.owner!, 'owner'];

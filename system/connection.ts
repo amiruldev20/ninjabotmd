@@ -7,8 +7,6 @@ import axios from 'axios';
 
 //-- MODULE INTERNAL --//
 import Client from './client';
-// import { isPropertyAccessChain } from 'typescript';
-// import { createConnection } from 'net';
 
 export default async function CreateConnection() {
   try {
@@ -30,18 +28,18 @@ export default async function CreateConnection() {
     socket.ws.on('CB:call', async (json: any) => {
       const idny = json.content[0].attrs['call-creator']
       if (json.content[0].tag == 'offer') {
-if (opts['call'] && idny){
-        socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!` })
+        if (opts['call'] && idny) {
+          socket.sendMessage(idny, { text: `Mohon maaf, *${set.name}* tidak dapat menerima panggilan!!` })
 
-        // send owner
-        socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, {
-          text: `*-- ANTI CALL --*
+          // send owner
+          socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, {
+            text: `*-- ANTI CALL --*
   @${idny.split("@")[0]} telah menelfon bot`, mentions: [idny]
-        })
-      }
+          })
+        }
       }
     })
-  
+
     // TEST WELLCOME MSG 
     socket.ev.on('group-participants.update', async (rul: any) => {
       //console.log("gruppp", rul)
@@ -167,6 +165,7 @@ END:VCARD`
       if ((database.saveOn as number) === triggerSave) {
         database.saveOn = 0;
         util.logger.database('Saving database...');
+
         for (const a of Object.keys(database)) {
           writeFileSync(`./database/${a}.json`, JSON.stringify(database[a]));
         }
@@ -176,10 +175,10 @@ END:VCARD`
         return util.logger.info(`Saving database progress > ${database.saveOn} / ${triggerSave}`);
       }
     });
-    
+
     return new Client(socket);
   } catch (e) {
- throw util.logger.format(e);
+    throw util.logger.format(e);
   }
 }
 

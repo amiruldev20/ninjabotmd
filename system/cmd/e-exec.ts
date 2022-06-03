@@ -26,7 +26,7 @@ const pino = require('pino')
 const client = global.client
 const set = global.set
 
-global.cmd.on(
+cmd.on(
 	['>', '=>'], ['owner'], async (renz, {
 		text, cmd
 	}) => {
