@@ -34,7 +34,7 @@
         "module": "^1.2.5",
         "moment-timezone": "^0.5.34",
         "node-cron": "^3.0.0",
-        "node-fetch": "^3.2.4",
+        "node-fetch": "^2.6.7",
         "nodeactyl": "^3.2.2",
         "nodemon": "^2.0.16",
         "os": "^0.1.2",

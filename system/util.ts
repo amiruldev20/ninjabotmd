@@ -175,14 +175,14 @@ export async function run(): Promise<void> {
 		}
 
 		//--- GLOBAL DATABASE ---//
-		global.db = usr;
-
 		logger.database('Database loaded');
 		global.client = await CreateConnection();
 		global.cmd = new CommandHandler();
-
+		//console.log(cmd)
+		await loadFile('./system/event');
 		await loadFile('./system/cmd');
-
+        global.db = usr
+		
 		client.socket.ev.on('messages.upsert', async (upsert) => {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;

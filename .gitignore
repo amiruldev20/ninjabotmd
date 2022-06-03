@@ -133,4 +133,5 @@ package-lock.json
 yarn.lock
 session/*.json
 system/lib/*.json
+system/cmd/p-ptero.ts
 ./config

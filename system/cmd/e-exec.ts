@@ -14,7 +14,7 @@ import {
 	dirname
 }
 	from 'path'
-import * as fetch from 'node-fetch'
+const fetch = require('node-fetch')
 const axios = require('axios')
 const bo = require('@bochilteam/scraper')
 const bail = require('@adiwajshing/baileys')
@@ -22,9 +22,6 @@ const wsf = require('wa-sticker-formatter')
 const os = require('os')
 const fs = require("fs")
 const pino = require('pino')
-
-const client = global.client
-const set = global.set
 
 cmd.on(
 	['>', '=>'], ['owner'], async (renz, {
@@ -38,7 +35,7 @@ cmd.on(
 	const wm2 = `Made by @687824239`
 	const web = 'https://amiruldev.my.id'
 	const tweb = 'MY WEBSITE'
-	const parse = cmd.includes('=>') ? text.replace('=>', 'return ').replace('md', 'client.socket').replace('legacy', 'client.socket').replace('zz', '.toString()') : text.replace('>', '').replace('md', 'client.socket').replace('legacy', 'client.socket')
+	const parse = cmd.includes('=>') ? text.replace('=>', 'return ').replace('legacy', 'client.socket').replace('zz', '.toString()') : text.replace('>', '').replace('legacy', 'client.socket')
 	try {
 		const evaluate = await eval(`;(async () => {${parse} })()`).catch((e: unknown) => {
 			return client.reply(renz, e as string);

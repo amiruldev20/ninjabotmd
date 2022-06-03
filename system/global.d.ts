@@ -24,6 +24,7 @@ export declare global {
 	var cmd: Command;
 	var opts: any,
 	var sock: any;
+	var socket: any;
 	var renz: proto;
 	var db: any;
 }
