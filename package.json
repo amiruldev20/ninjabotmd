@@ -1,6 +1,6 @@
 {
     "name": "ninjabotmd",
-    "version": "4.0.0",
+    "version": "beta",
     "description": "Multiple bot whatsapp automatic, all in one",
     "main": "./system/main.ts",
     "scripts": {
@@ -12,8 +12,8 @@
     "author": "amiruldev20",
     "license": "ISC",
     "dependencies": {
-        "@adiwajshing/baileys": "^4.1.0",
-        "@adiwajshing/keyed-db": "^0.2.4",
+        "@adiwajshing/baileys": "latest",
+        "@adiwajshing/keyed-db": "latest",
         "@bochilteam/scraper": "^2.0.0",
         "@commonify/lowdb": "^3.0.0",
         "@hapi/boom": "^9.1.4",
@@ -35,7 +35,6 @@
         "moment-timezone": "^0.5.34",
         "node-cron": "^3.0.0",
         "node-fetch": "^2.6.7",
-        "nodeactyl": "^3.2.2",
         "nodemon": "^2.0.16",
         "os": "^0.1.2",
         "pino": "^7.11.0",
