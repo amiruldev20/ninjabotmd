@@ -22,66 +22,20 @@ await mydb(renz)
 } catch {
 console.log(red('Error in mydb'))
 }
- // let usr = db.data.usr[renz.]
-//-- CONSOLE ALL --//
-/*
-console.log("DBUSR", dbusr)
-console.log("USR", usr)
-console.log("TIPE", renz.type[0])
-console.log("ISGROUP", renz.validator.isGroup)
-*/
-
-//-- PUSH DB
-//console.log(renz)
-/*
-if (renz.baileys == true) return console.log('BAILEYS')
-
-
-if (global.cekusr == true) {
-console.log("JID TELAH TERDAFTAR")
-} else {
-console.log("PUSH DB")
-usr.push({
-id: renz.sender,
-nama: renz.pushName,
-umur: 17,
-regist: false,
-limit: 10,
-warn: 0,
-ban: false,
-call: 0,
-afk: false,
-afkmsg: '',
-afktime: 0,
-autodown: false,
-regtime: 0,
-exp: 100,
-money: 0,
-prem: false,
-premtime: 0,
-joincount: 0,
-lastclaim: 0,
-lang: 'id',
-pc: 0,
-sticker: false,
-sn: `NINJA-${createHash('md5').update(`${renz.sender}`).digest('hex')}`,
-})
-fs.writeFileSync('./database/user.json', JSON.stringify(usr))
-}
 
 //-- ISI FIRST CHAT --//
 let date: any = new Date();
 if (renz.validator.isGroup == false) {
-if (date - dbusr.pc < 60000) return
-client.sendBtn1(renz, `Halo, *${renz.pushName}* 👋
+if (date - db.usr[renz.sender!].pc < 60000) return
+client.reply(renz, `Halo, *${renz.pushName}* 👋
 selamat datang di *${set.name}*
 untuk membuat stiker otomatis, silahkan klik tombol
 *on sticker* dibawah!!
 
-*NB:* BOT INI BELUM JADI`, `${set.name} 2022`, 'ON STICKER', '#on sticker')
-dbusr.pc = date * 1
+*NB:* BOT INI BELUM JADI`)
+db.usr[renz.sender!].pc = date * 1
 }
-*/
+
 /*
 //-- AUTO STICKER PC 
 if (renz.type[0] == "imageMessage") {

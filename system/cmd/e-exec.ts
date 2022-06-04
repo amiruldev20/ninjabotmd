@@ -5,15 +5,6 @@ import {
 }
 	from 'util'
 let exec = promisify(cp.exec).bind(cp)
-import syntaxerror from 'syntax-error'
-import {
-	fileURLToPath
-}
-	from 'url'
-import {
-	dirname
-}
-	from 'path'
 const fetch = require('node-fetch')
 const axios = require('axios')
 const bo = require('@bochilteam/scraper')

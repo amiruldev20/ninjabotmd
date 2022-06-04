@@ -158,7 +158,7 @@ export function parseJson(json: object, options?: {
 export async function run(): Promise<void> {
 	try {
 		console.clear();
-		console.log(chalk.green('Starting running bot...'));
+		console.log(chalk.green('Starting NINJA BOT...'));
 		await delay(2000);
 		console.clear();
 		console.log(chalk.cyan.bold(readFileSync('./system/loader.txt').toString()));
@@ -191,7 +191,7 @@ export async function run(): Promise<void> {
 			global.renz = renz
 			global.sock = client.socket
 		})
-		return global.cmd.commandList.length > 0 ? logger.cmd(`Succesfully loaded ${global.cmd.commandList.length} commands`) : logger.warn('There is no command loaded');
+		return global.cmd.commandList.length > 0 ? logger.cmd(`Succesfully loaded ${global.cmd.commandList.length} commands, bot ready!!`) : logger.warn('There is no command loaded');
 
 	} catch (e) {
 		throw logger.format(e);
@@ -212,5 +212,5 @@ export const logger = {
 	info: (message: any) => console.log(`${chalk.blueBright.bold('NINJA BOT')} ~> ${format(message)}`),
 	warn: (message: any) => console.log(`${chalk.yellowBright.bold('WARNING')}  ~> ${format(message)}`),
 	cmd: (message: any) => console.log(`${chalk.hex('#6ca8fc').bold('NINJA BOT')} ~> ${format(message)}`),
-	database: (message: any) => console.log(`${chalk.magentaBright.bold('DATABASE')} | ${format(message)}`),
+	database: (message: any) => console.log(`${chalk.magentaBright.bold('DATABASE')} - ${format(message)}`),
 };
