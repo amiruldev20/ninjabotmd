@@ -1,1 +1,31 @@
-{}
+{
+  "usr": {
+    "6281358919342@s.whatsapp.net": {
+      "name": "WWW.AMIRULDEV.MY.ID",
+      "idsrv": 0,
+      "exp": 100,
+      "limit": 10,
+      "money": 0,
+      "level": 1,
+      "role": "Bronze",
+      "pc": 0,
+      "call": 0,
+      "lastclaim": 0,
+      "age": 17,
+      "regtime": 0,
+      "regist": false,
+      "afk": false,
+      "afkmsg": "",
+      "ban": false,
+      "warn": 0,
+      "prem": false,
+      "premtime": 0
+    }
+  },
+  "chat": {
+    "120363042184096226@g.us": {
+      "name": "MY TESTER",
+      "banned": false
+    }
+  }
+}
