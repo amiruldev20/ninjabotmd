@@ -38,13 +38,19 @@ interface LowData {
             warn: number,
             prem: boolean,
             premtime: number,
-            regist: boolean
+            regist: boolean,
+            sticker: boolean,
+            download: boolean
         }
     },
     chat: {
         [jid: string]: {
             name: any,
-            banned: boolean
+            banned: boolean,
+            sticker: boolean,
+            download: boolean,
+            antilink: boolean,
+            antibot: boolean
         }
     }
 }
@@ -87,7 +93,9 @@ export async function mydb(meta: any) {
                 ban: false,
                 warn: 0,
                 prem: false,
-                premtime: 0
+                premtime: 0,
+                sticker: false,
+                download: false
             }
 
         let chat = db.data.chat[meta.gcData.id]
@@ -99,7 +107,11 @@ export async function mydb(meta: any) {
         } else
             db.data.chat[meta.gcData.id] = {
                 name: meta.gcData.subject,
-                banned: false
+                banned: false,
+                sticker: false,
+                download: false,
+                antilink: false,
+                antibot: false
             }
 await db.write()
     } catch (e) {
