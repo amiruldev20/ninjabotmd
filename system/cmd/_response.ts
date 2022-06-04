@@ -24,6 +24,9 @@ console.log(red('Error in mydb'))
 }
 
 //-- ISI FIRST CHAT --//
+//console.log(renz)
+if (renz.from?.endsWith("broadcast")) return console.log("BROADCAST STATUS")
+if (renz.baileys == true) return
 let date: any = new Date();
 if (renz.validator.isGroup == false) {
 if (date - db.usr[renz.sender!].pc < 60000) return
@@ -207,7 +210,7 @@ MSG: ${renz.string}`)
 else if (renz.type[0] == "protocolMessage") {
 console.log(`\n\n
 ${green("GROUP: ")}${green(isGc ? gc?.subject: 'FALSE')}
-${cyan("NAME: ")}${cyan(p.pushName)} MENGHAPUS STORY!!
+${cyan("NAME: ")}${cyan(p.pushName)} 
 ${green("JID: ")}${green(p.key.remoteJid)}
 ${magenta("ID: ")}${magenta(p.key.id)}
 ${cyan("PARTICIPANT: ")}${cyan(p.key.participant)}
@@ -219,7 +222,7 @@ MSG: ${renz.string}`)
 else if (renz.type[0] == "senderKeyDistributionMessage") {
 console.log(`\n\n
 ${green("GROUP: ")}${green(isGc ? gc?.subject : 'FALSE')}
-${cyan("NAME: ")}${cyan(p.pushName)} MEMBUAT STORY!!
+${cyan("NAME: ")}${cyan(p.pushName)}
 ${green("JID: ")}${green(p.key.remoteJid)}
 ${magenta("ID: ")}${magenta(p.key.id)}
 ${cyan("PARTICIPANT: ")}${cyan(p.key.participant)}
@@ -230,7 +233,7 @@ MSG: ${renz.string}`)
 
 else if (renz.type[0] == "listResponseMessage") {
 console.log(`\n\n
-${green("GROUP: ")}${green(gc?.subject)}
+${green("GROUP: ")}${green(isGc ? gc?.subject : 'FALSE')}))}
 ${cyan("NAME: ")}${cyan(p.pushName)}
 ${green("JID: ")}${green(p.key.remoteJid)}
 ${magenta("ID: ")}${magenta(p.key.id)}
