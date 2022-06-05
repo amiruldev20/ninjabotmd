@@ -24,7 +24,7 @@ import {
 }
 	from 'util';
 import {
-	readFileSync, readdirSync, existsSync, mkdirSync
+	readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync
 }
 	from 'fs';
 import axios, {
@@ -180,9 +180,12 @@ export async function run(): Promise<void> {
 		//console.log(cmd)
 		await loadFile('./system/event');
 		await loadFile('./system/cmd');
-		let usr = require(`../${opts._[0] ? opts._[0] + '_' : 'ninjabot'}.db.json`)
+		try {
+		let usr = require(`../${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
         global.db = usr
-		
+		} catch {
+		writeFileSync(`${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`, `{}`)
+		}
 		client.socket.ev.on('messages.upsert', async (upsert) => {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;

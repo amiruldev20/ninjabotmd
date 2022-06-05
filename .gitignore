@@ -132,6 +132,6 @@ dist
 package-lock.json
 yarn.lock
 session/*.json
-system/lib/*.json
+*.json
 system/cmd/p-ptero.ts
 ./config

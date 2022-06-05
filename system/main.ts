@@ -9,10 +9,7 @@ Thanks to: Istiqmal
 -----------------------
 tambahin aja nama lu, hargai yang buat
 */
-
-import {
-    config
-} from 'dotenv';
+import { config } from 'dotenv'
 import {
     schedule
 } from 'node-cron';
