@@ -102,25 +102,25 @@ export async function mydb(meta: any) {
                 download: false
             }
 
-        let chat = renz.gcData
+        let chat = meta.gcData
         let idgc = db.data.chat[meta.gcData.id]
-     
-            if (idgc) {
-                if (!('name' in chat))
-                    chat.name = meta.gcData.subject
-                if (!('isBanned' in chat))
-                    chat.banned = false
-            } else
-                db.data.chat[meta.gcData.id] = {
-                    name: meta.gcData.subject,
-                    banned: false,
-                    sticker: false,
-                    download: false,
-                    antilink: false,
-                    antibot: false
-                }
-            
-            await db.write()
+   //     if (chat == false) return console.log("NO WRITE CHAT")
+        if (idgc) {
+            if (!('name' in idgc))
+                chat.name = meta.gcData.subject
+            if (!('isBanned' in idgc))
+                chat.banned = false
+        } else
+            db.data.chat[meta.gcData.id] = {
+                name: meta.gcData.subject,
+                banned: false,
+                sticker: false,
+                download: false,
+                antilink: false,
+                antibot: false
+            }
+
+        await db.write()
     } catch (e) {
         console.error(e)
     }
