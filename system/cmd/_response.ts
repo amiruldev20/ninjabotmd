@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import { red, green, yellow, blue, magenta, cyan } from 'chalk';
 import * as baileys from '@adiwajshing/baileys';
 //-- DATABASE --//
-import { mydb } from '../lib/lowdb';
+import { mydb } from '../../lowdb';
 
 
 client.socket.ev.on('messages.upsert', async (upsert: { messages: baileys.proto.IWebMessageInfo[]; }) => {

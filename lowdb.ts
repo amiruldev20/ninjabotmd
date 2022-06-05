@@ -14,8 +14,11 @@ tambahin aja nama lu, hargai yang buat
 import { join, dirname } from 'path'
 import { Low, JSONFile } from '@commonify/lowdb'
 const fs = require('fs')
+let yargs = require('yargs')
+const opts: any = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 
-const file = join(__dirname, 'db.json')
+const file = join(__dirname,`${opts._[0] ? opts._[0] + '_' : 'ninjabot'}.db.json`)
+//onst file = join(__dirname, `db.json`)
 
 interface LowData {
     usr: {
@@ -65,8 +68,8 @@ export async function mydb(meta: any) {
         chat: {},
         ...(db.data || {})
     }
-    if (meta.from.endsWith("broadcast")) return
-    if (meta.key.fromMe) return
+    if (meta.from.endsWith("broadcast")) return console.log("NO WRITE BROADCAST")
+    if (meta.key.fromMe == true) return console.log("NO WRITE ME")
     try {
         // TODO: use loop to insert data instead of this
         let usr = db.data.usr[meta.sender!]

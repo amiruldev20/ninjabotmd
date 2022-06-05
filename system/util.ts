@@ -32,11 +32,10 @@ import axios, {
 }
 	from 'axios';
 
-const yargs = require('yargs');
+let yargs = require('yargs')
 
 //--- NGANU DATABASE ---//
 const set = require('../database/settings.json')
-let usr = require('./lib/db.json')
 
 export async function delay(ms: number): Promise<void> {
 	new Promise((resolve) => setTimeout(resolve, ms));
@@ -181,6 +180,7 @@ export async function run(): Promise<void> {
 		//console.log(cmd)
 		await loadFile('./system/event');
 		await loadFile('./system/cmd');
+		let usr = require(`../${opts._[0] ? opts._[0] + '_' : 'ninjabot'}.db.json`)
         global.db = usr
 		
 		client.socket.ev.on('messages.upsert', async (upsert) => {
