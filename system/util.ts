@@ -180,14 +180,14 @@ export async function run(): Promise<void> {
 		//console.log(cmd)
 		await loadFile('./system/event');
 		await loadFile('./system/cmd');
-		
+
 		try {
-		let usr = require(`../${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
-        global.db = usr
+			let usr: any = readFileSync(`${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
+			global.db = JSON.parse(usr);
 		} catch {
-		writeFileSync(`${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`, `{}`)
-		let usr = require(`../${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
-        global.db = usr
+			writeFileSync(`${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`, `{}`)
+			let usr: any = readFileSync(`${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
+			global.db = JSON.parse(usr);
 		}
 		client.socket.ev.on('messages.upsert', async (upsert) => {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
@@ -197,7 +197,7 @@ export async function run(): Promise<void> {
 			global.renz = renz
 			global.sock = client.socket
 		})
-		return global.cmd.commandList.length > 0 ? logger.cmd(`Succesfully loaded ${global.cmd.commandList.length} commands, bot ready!!`) : logger.warn('There is no command loaded');
+		return global.cmd.commandList.length > 0 ? logger.cmd(`Succesfully loaded ${global.cmd.commandList.length} commands`) : logger.warn('There is no command loaded');
 
 	} catch (e) {
 		throw logger.format(e);

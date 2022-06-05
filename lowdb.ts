@@ -13,11 +13,12 @@ tambahin aja nama lu, hargai yang buat
 //-- MODULE EXTERNAL
 import { join, dirname } from 'path'
 import { Low, JSONFile } from '@commonify/lowdb'
+import { createUnparsedSourceFile } from 'typescript'
 const fs = require('fs')
 let yargs = require('yargs')
 const opts: any = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 
-const file = join(__dirname,`${opts._[0] ? opts._[0] + '_' : 'ninjabot'}.db.json`)
+const file = join(__dirname, `${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
 //onst file = join(__dirname, `db.json`)
 
 interface LowData {
@@ -69,7 +70,7 @@ export async function mydb(meta: any) {
         ...(db.data || {})
     }
     if (meta.from.endsWith("broadcast")) return console.log("NO WRITE BROADCAST")
-    if (meta.key.fromMe == true) return console.log("NO WRITE ME")
+    if (meta.key.fromMe == true) return
     try {
         // TODO: use loop to insert data instead of this
         let usr = db.data.usr[meta.sender!]
@@ -101,24 +102,29 @@ export async function mydb(meta: any) {
                 download: false
             }
 
-        let chat = db.data.chat[meta.gcData.id]
-        if (chat) {
-            if (!('name' in chat))
-                chat.name = meta.gcData.subject
-            if (!('isBanned' in chat))
-                chat.banned = false
-        } else
-            db.data.chat[meta.gcData.id] = {
-                name: meta.gcData.subject,
-                banned: false,
-                sticker: false,
-                download: false,
-                antilink: false,
-                antibot: false
-            }
-await db.write()
+        let chat = renz.gcData
+        let idgc = db.data.chat[meta.gcData.id]
+     
+            if (idgc) {
+                if (!('name' in chat))
+                    chat.name = meta.gcData.subject
+                if (!('isBanned' in chat))
+                    chat.banned = false
+            } else
+                db.data.chat[meta.gcData.id] = {
+                    name: meta.gcData.subject,
+                    banned: false,
+                    sticker: false,
+                    download: false,
+                    antilink: false,
+                    antibot: false
+                }
+            
+            await db.write()
     } catch (e) {
         console.error(e)
     }
-
+    setInterval(() => {
+        db.write().catch(console.error)
+    }, 60000)
 }

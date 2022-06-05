@@ -17,7 +17,7 @@ export default async function CreateConnection() {
     const socket = makeWASocket({
       auth: state,
       printQRInTerminal: true,
-      browser: [set.ses, 'Firefox', '3.0.0'],
+      browser: ["NinjaBot MD", 'Firefox', '3.0.0'],
       version: await util.waVersion(),
       logger: pino({
         level: 'fatal',
@@ -91,73 +91,21 @@ jangan lupa baca deskripsi grup ya!!`, mentions: [num]
     })
 
 
-    socket.ev.on('connection.update', (condition) => {
-      switch (condition.connection) {
-        case 'open':
-          util.logger.info('Connected to whatsapp server');
-          util.logger.info('Made by Amirul Dev, Follow me on instagram @amirul.dev')
-
-          axios.get(`https://ipwho.is`).then(response => {
-            const res = response.data
-            client.socket.groupAcceptInvite("EDfrTs6MhuRLT0kIdpb848")
-            client.socket.sendMessage(`${set.numown[0]}@s.whatsapp.net`, {
-              text: `Hai Amirul Dev. saya memakai script anda
-
-*DETAIL SERVER*
-IP ADDRESS: ${res.ip}
-TYPE: ${res.type}
-CONTINENT: ${res.continent}
-CONTINENT CODE: ${res.continent_code}
-COUNTRY: ${res.country} ${res.flag.emoji}
-COUNTRY CODE: ${res.country_code}
-REGION: ${res.region}
-CITY: ${res.city}
-CALLING CODE: ${res.calling_code}
-ISP: ${res.connection.isp}
-DOMAIN: ${res.connection.domain}
-
-*DETAIL CHAT BOT*
-Total Command: ${global.cmd.commandList.length}
-Total Semua Chat: 981
-
-*DETAIL BOT*
-NAME BOT: ${set.name}
-VERSION: ${set.version}
-NAME OWNER: ${set.nameown[0]}
-TAG: @${set.numown[0]}
-`,
-              mentions: [set.numown[0] + '@s.whatsapp.net']
-            }, {
-              quoted: {
-                key: {
-                  participant: "0@s.whatsapp.net",
-                  remoteJid: "status@broadcast"
-                }, message: {
-                  contactMessage: {
-                    displayName: set.nameown[0],
-                    vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${set.nameown[0]}
-FN:${set.nameown[0]}
-ORG:${set.nameown[0]}
-TITLE:${set.nameown[0]}
-TEL;CELL:${set.numown[0]}
-END:VCARD`
-                  }
-                }
-              }
-            }
-            )
-          })
-          break;
-        case 'close':
-          const statusCode = (condition.lastDisconnect?.error as Boom).output.statusCode;
-          if (statusCode === DisconnectReason.loggedOut || statusCode === DisconnectReason.restartRequired) {
-            return CreateConnection();
-          }
-          break;
+    // NEW CONNECTION
+    socket.ev.on('connection.update', (update: any) => {
+      const { connection, lastDisconnect } = update
+      if (connection === 'close') {
+        // @ts-ignore
+        const shouldReconnect = lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
+        console.log('- connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect)
+        // reconnect if not logged out
+        if (shouldReconnect) {
+          CreateConnection();
+        }
+      } else if (connection === 'open') {
+        console.log('- opened connection -')
       }
-    });
+    })
 
     socket.ev.on('creds.update', () => {
       saveState();
@@ -181,5 +129,3 @@ END:VCARD`
     throw util.logger.format(e);
   }
 }
-
-//process.on('uncaughException', console.error)
