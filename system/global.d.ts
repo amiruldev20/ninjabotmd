@@ -27,4 +27,5 @@ export declare global {
 	var socket: any;
 	var renz: proto;
 	var db: any;
+	var limit: any;
 }

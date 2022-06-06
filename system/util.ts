@@ -31,6 +31,7 @@ import axios, {
 	AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse
 }
 	from 'axios';
+import { createUnparsedSourceFile, isConstructorDeclaration } from 'typescript';
 
 let yargs = require('yargs')
 
@@ -154,6 +155,8 @@ export function parseJson(json: object, options?: {
 	return compile.join('');
 }
 
+
+
 export async function run(): Promise<void> {
 	try {
 		console.clear();
@@ -189,13 +192,33 @@ export async function run(): Promise<void> {
 			let usr: any = readFileSync(`${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
 			global.db = JSON.parse(usr);
 		}
+
+
 		client.socket.ev.on('messages.upsert', async (upsert) => {
 			if (!Object.keys(upsert.messages[0]).includes('message') || !Object.keys(upsert.messages[0]).includes('key')) {
 				return;
 			}
 			const renz = await client.metadata(upsert.messages[0])
-			global.renz = renz
+
 			global.sock = client.socket
+
+			async function amd(anu: any) {
+				//console.log(renz)
+				if (renz.key.fromMe == true) return console.log("NO LIMIT BOT")
+
+				var mylim = db.usr[renz.sender!]
+				let data = JSON.parse(await (readFileSync('ninjabot.db.json')).toString())
+				let data2 = data.usr[renz.sender!]
+				
+				data2.limit -= anu
+					client.reply(renz, `Limit anda terpakai *${anu} limit*`)
+					//console.log(mylim - anu)
+				//	console.log(`tes`, mylim)
+				
+				
+			}
+			global.limit = amd
+
 		})
 		return global.cmd.commandList.length > 0 ? logger.cmd(`Succesfully loaded ${global.cmd.commandList.length} commands`) : logger.warn('There is no command loaded');
 
@@ -220,3 +243,7 @@ export const logger = {
 	cmd: (message: any) => console.log(`${chalk.hex('#6ca8fc').bold('NINJA BOT')} ~> ${format(message)}`),
 	database: (message: any) => console.log(`${chalk.magentaBright.bold('DATABASE')} - ${format(message)}`),
 };
+function anu(anu: any): any {
+	throw new Error('Function not implemented.');
+}
+

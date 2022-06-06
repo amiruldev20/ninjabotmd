@@ -19,6 +19,8 @@ client.socket.ev.on('messages.upsert', async (upsert: { messages: baileys.proto.
     const renz = await client.metadata(upsert.messages[0]);
     if (renz.from?.endsWith("broadcast")) return console.log("BROADCAST STATUS")
     if (renz.baileys == true) return
+  
+    
     await mydb(renz)
 
     //-- ISI FIRST CHAT --//

@@ -13,13 +13,11 @@ tambahin aja nama lu, hargai yang buat
 //-- MODULE EXTERNAL
 import { join, dirname } from 'path'
 import { Low, JSONFile } from '@commonify/lowdb'
-import { createUnparsedSourceFile } from 'typescript'
 const fs = require('fs')
 let yargs = require('yargs')
 const opts: any = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 
 const file = join(__dirname, `${opts._[0] ? opts._[0] + '' : 'ninjabot'}.db.json`)
-//onst file = join(__dirname, `db.json`)
 
 interface LowData {
     usr: {
@@ -44,7 +42,8 @@ interface LowData {
             premtime: number,
             regist: boolean,
             sticker: boolean,
-            download: boolean
+            download: boolean,
+            joincount: number
         }
     },
     chat: {
@@ -99,17 +98,18 @@ export async function mydb(meta: any) {
                 prem: false,
                 premtime: 0,
                 sticker: false,
-                download: false
+                download: false,
+                joincount: 0
             }
 
         let chat = meta.gcData
         let idgc = db.data.chat[meta.gcData.id]
-   //     if (chat == false) return console.log("NO WRITE CHAT")
+
         if (idgc) {
             if (!('name' in idgc))
-                chat.name = meta.gcData.subject
+                idgc.name = meta.gcData.subject
             if (!('isBanned' in idgc))
-                chat.banned = false
+                idgc.banned = false
         } else
             db.data.chat[meta.gcData.id] = {
                 name: meta.gcData.subject,
@@ -124,7 +124,5 @@ export async function mydb(meta: any) {
     } catch (e) {
         console.error(e)
     }
-    setInterval(() => {
-        db.write().catch(console.error)
-    }, 60000)
+    
 }

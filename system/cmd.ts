@@ -12,6 +12,8 @@ tambahin aja nama lu, hargai yang buat
 
 //-- MODULE EXTERNAL
 import { proto } from '@adiwajshing/baileys';
+import { createLiteralTypeNode } from 'typescript';
+import { Z_ASCII } from 'zlib';
 
 //-- MODULE INTERNAL
 import { Proto } from './client.d';
@@ -41,6 +43,7 @@ export default class CommandHandler {
       },
       tag,
       help: 'Tidak ada info detail command!!',
+      limit: 0,
       wait: true,
       prefix: true,
       enable: true,
@@ -131,7 +134,22 @@ export default class CommandHandler {
   public getAccess = (renz: Proto, event: ICommandHandler.CommandProperty): void | Promise<proto.WebMessageInfo> | 200 => {
     let CONFIG!: [string | string[] | boolean, string];
 
-    if (event.event?.regist && db.usr.regist == false) CONFIG = [event.event.regist!, 'regist'];
+    if (event.event?.regist && db.usr[renz.sender!].regist == false) {
+      //     console.log(db.usr[renz.sender!])
+      CONFIG = [event.event.regist!, 'regist'];
+    }
+
+    if (event.event?.limit > 0) {
+      console.log(event)
+      client.reply(renz, `anda memakai *${event.event.limit}* limit`)
+    }
+
+    if (event.event?.help && renz.string.includes('-h')) {
+      client.reply(renz, `*COMMAND HELP*
+    
+${event.event.help}`)
+    }
+
     if (event.event?.query && event.query.length === 0) CONFIG = [event.event.query!, 'query'];
     if (event.event?.group && !renz.validator.isGroup) CONFIG = [event.event.group!, 'group'];
     if (event.event?.owner && !renz.validator.isOwner) CONFIG = [event.event.owner!, 'owner'];

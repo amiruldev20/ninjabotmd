@@ -18,7 +18,7 @@ contoh: sock.sendMessage(renz.from, { text: "hello world"})
     prefix: true,
     group: false,
     enable: true,
-    regist: false,
+    regist: true,
 }
 )
 

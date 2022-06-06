@@ -22,6 +22,7 @@ export namespace ICommandHandler {
         };
         tag: string[];
         help: string;
+        limit: any;
         index: number;
         callback: (renz: Proto, property: CommandProperty) => Promise<any> | any;
         prefix: boolean;
@@ -35,6 +36,7 @@ export namespace ICommandHandler {
         owner?: boolean | string;
         group?: boolean | string;
         regist?: boolean | string;
+        limit?: any;
         info?: boolean | string;
     }
     export interface CommandProperty {
