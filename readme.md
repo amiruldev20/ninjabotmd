@@ -1,6 +1,6 @@
 # NINJABOT MD BETA
 ## Base example bot whatsapp multi device library baileys
-### script ini akan terus dikembangkan, apabila butuh bantuan silahkan wa.me/6281358919342
+### BASE DALAM PROSES PERBAIKAN, APABILA BUTUH BANTUAN WA SAYA => [![MY WHATSAPP](https://img.shields.io/badge/WA-ME.svg)](https://wa.me/687852104) 
 
 !! ALL FUNCTION ADA PADA SYSTEM/CLIENT.TS, APABILA TIDAK FAHAM CARA PENGGUNAAN, SILAHKAN WA SAYA DIATAS
 
