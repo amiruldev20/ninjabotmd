@@ -11,7 +11,7 @@ tambahin aja nama lu, hargai yang buat
 */
 
 //-- MODULE EXTERNAL
-import { proto } from '@adiwajshing/baileys';
+import { proto } from 'baileys';
 import { createLiteralTypeNode } from 'typescript';
 import { Z_ASCII } from 'zlib';
 
