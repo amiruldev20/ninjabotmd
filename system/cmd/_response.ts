@@ -2,7 +2,7 @@
 import util from 'util';
 import { readFileSync } from 'fs';
 import { red, green, yellow, blue, magenta, cyan } from 'chalk';
-import * as baileys from '@adiwajshing/baileys';
+import * as baileys from 'baileys';
 //-- DATABASE --//
 import { mydb } from '../../lowdb';
 
