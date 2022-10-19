@@ -39,7 +39,6 @@
         "os": "^0.1.2",
         "pino": "^7.11.0",
         "qrcode-terminal": "^0.12.0",
-        "sharp": "0.29.3",
         "syntax-error": "^1.4.0",
         "ts-node": "^10.7.0",
         "ts-node-dev": "^1.1.8",
