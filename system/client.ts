@@ -21,7 +21,7 @@ const { fromBuffer } = require('file-type');
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
 const PhoneNumber = require('awesome-phonenumber');
 const pino = require('pino');
-import * as baileys from '@adiwajshing/baileys';
+import * as baileys from 'baileys';
 
 
 //-- MODULE INTERNAL 
