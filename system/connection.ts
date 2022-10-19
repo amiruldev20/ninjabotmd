@@ -2,7 +2,7 @@
 import pino from 'pino';
 import { Boom } from '@hapi/boom';
 import { writeFileSync } from 'fs';
-import makeWASocket, { DisconnectReason, useSingleFileAuthState, makeInMemoryStore } from '@adiwajshing/baileys';
+import makeWASocket, { DisconnectReason, useSingleFileAuthState, makeInMemoryStore } from 'baileys';
 import axios from 'axios';
 
 //-- MODULE INTERNAL --//
