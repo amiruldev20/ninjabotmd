@@ -13,7 +13,7 @@ tambahin aja nama lu, hargai yang buat
 
 //-- MODULE EXTERNAL
 import { Readable } from 'stream';
-import { AnyMessageContent, GroupMetadata, MiscMessageGenerationOptions, proto } from '@adiwajshing/baileys';
+import { AnyMessageContent, GroupMetadata, MiscMessageGenerationOptions, proto } from 'baileys';
 import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 // EXPORT CONTENT
