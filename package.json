@@ -12,7 +12,7 @@
     "author": "amiruldev20",
     "license": "ISC",
     "dependencies": {
-        "@adiwajshing/baileys": "latest",
+        "baileys": "4.5.8",
         "@adiwajshing/keyed-db": "latest",
         "@bochilteam/scraper": "^2.0.0",
         "@commonify/lowdb": "^3.0.0",
