@@ -1,0 +1,37 @@
+name: Run
+on:  
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '*/2 * * * *' # every two minutes
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set outputs vars
+        id: vars
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          
+      - name: Choose random file extension
+        id: random_extension
+        run: |
+          extensions=("js" "py" "rb" "java" "cpp" "cs" "php" "go" "rs" "swift" "kt" "ts" "html" "css" "scss" "json" "xml" "md" "sh" "lua")
+          random_ext=${extensions[$RANDOM % ${#extensions[@]}]}
+          echo "::set-output name=extension::$random_ext"
+
+      - uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: ".cache/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
+          FILE_DATA: "🟩 Green chart hack - commit ${{ steps.vars.outputs.sha_short }} 🟩"
+
+      - name: Add and commit
+        uses: EndBug/add-and-commit@v7.1.1 
+        with:
+          add: ".cache/*"
+          message: "Automatic commit every two minutes"
