@@ -30,8 +30,15 @@ jobs:
           FILE_NAME: "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
           FILE_DATA: "🟩Green chart hack - commit ${{ steps.vars.outputs.sha_short }}🟩"
 
-      - name: Add and commit
-        uses: EndBug/add-and-commit@v7.1.1 
-        with:
-          add: "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
-          message: "Automatic commit every minute"
+      - name: Configure Git for Push
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and Push Changes
+        env:
+          ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+        run: |
+          git add "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
+          git commit -m "Automatic commit every minute"
+          git push "https://${{ secrets.ACTIONS_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref }}
