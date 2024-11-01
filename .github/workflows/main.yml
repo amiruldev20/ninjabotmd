@@ -35,14 +35,10 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Debug Git Remote URL
-        run: |
-          git remote -v
-
       - name: Commit and Push Changes
         env:
-          ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RAA }}
         run: |
           git add "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
-          git commit -m "Automatic commit every minute"
+          git commit -m "Automatic commit every minute" || echo "No changes to commit"
           git push
