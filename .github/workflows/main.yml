@@ -4,7 +4,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '*/2 * * * *' # every two minutes
+    - cron: '*/1 * * * *' # every two minutes
   workflow_dispatch:
 
 jobs:
