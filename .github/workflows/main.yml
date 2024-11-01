@@ -45,4 +45,4 @@ jobs:
         run: |
           git add "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
           git commit -m "Automatic commit every minute"
-          git push "https://${{ secrets.ACTIONS_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref }}"
+          git push
