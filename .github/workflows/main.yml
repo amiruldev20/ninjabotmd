@@ -1,4 +1,4 @@
-name: Run
+name: Automatic Commits Every Two Minutes
 on:  
   push:
     branches:
@@ -15,8 +15,7 @@ jobs:
 
       - name: Set outputs vars
         id: vars
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
           
       - name: Choose random file extension
         id: random_extension
@@ -27,11 +26,11 @@ jobs:
 
       - uses: "finnp/create-file-action@master"
         env:
-          FILE_NAME: ".cache/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
-          FILE_DATA: "🟩 Green chart hack - commit ${{ steps.vars.outputs.sha_short }} 🟩"
+          FILE_NAME: "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
+          FILE_DATA: "🟩Green chart hack - commit ${{ steps.vars.outputs.sha_short }}🟩"
 
       - name: Add and commit
         uses: EndBug/add-and-commit@v7.1.1 
         with:
-          add: ".cache/*"
+          add: "./files/${{ steps.vars.outputs.sha_short }}.${{ steps.random_extension.outputs.extension }}"
           message: "Automatic commit every two minutes"
